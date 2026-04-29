@@ -65,7 +65,7 @@ function App() {
     };
   }, []);
 
-  const whatsappLink = "https://wa.me/9779800000000?text=Hello%20Lotus%20Design,%20I%20would%20like%20to%20order%20a%20personalized%20gift.";
+  const whatsappLink = "https://wa.me/9779848363025?text=Hello%20Lotus%20Print%20%26%20Custom%20Gift,%20I%20would%20like%20to%20order%20a%20personalized%20gift.";
 
   const services = [
     { icon: <ImageIcon className="w-6 h-6" />, title: "Custom Photo Frames", desc: "Premium framing for your most cherished memories." },
@@ -91,7 +91,7 @@ function App() {
 
   const testimonials = [
     { name: "Aarav Sharma", role: "Wedding Client", quote: "The frames we ordered for our wedding photos were beyond expectation. The quality and attention to detail are truly premium." },
-    { name: "Priya Thapa", role: "Business Owner", quote: "Lotus Design transformed our brand. The business cards and packaging design gave us the luxury feel we were looking for." },
+    { name: "Priya Thapa", role: "Business Owner", quote: "Lotus Print transformed our brand. The business cards and packaging design gave us the luxury feel we were looking for." },
     { name: "Nitesh Gurung", role: "Corporate Partner", quote: "We order our corporate mugs and t-shirts exclusively from Lotus. Fast delivery, impeccable quality every single time." },
   ];
 
@@ -115,8 +115,8 @@ function App() {
               transition={{ duration: 1, ease: "easeOut" }}
               className="flex flex-col items-center"
             >
-              <h1 className="text-4xl md:text-6xl font-bold tracking-tighter text-white flex items-center gap-4">
-                Lotus <span className="text-gradient-gold">Design</span>
+              <h1 className="text-3xl md:text-5xl font-bold tracking-tighter text-white text-center">
+                Lotus <span className="text-gradient-gold">Print</span> &amp; Custom Gift
               </h1>
               <motion.div 
                 className="h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent mt-8"
@@ -167,7 +167,7 @@ function App() {
             transition={{ duration: 1, delay: 2.2, ease: [0.16, 1, 0.3, 1] }}
             className="inline-block mb-6 px-4 py-1.5 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/5 backdrop-blur-md"
           >
-            <span className="text-xs md:text-sm font-medium text-[#D4AF37] uppercase tracking-wider">Premium Craft Studio in Nepal</span>
+            <span className="text-xs md:text-sm font-medium text-[#D4AF37] uppercase tracking-wider">Premium Craft Studio · Nepalgunj, Banke</span>
           </motion.div>
           
           <motion.h1 
@@ -227,7 +227,7 @@ function App() {
             </motion.h2>
             <motion.div variants={fadeIn} className="space-y-6 text-lg text-white/60 font-light">
               <p>
-                Lotus Design is not just a print shop. We are a boutique craft studio dedicated to turning ordinary photos and ideas into heirloom-grade keepsakes.
+                Lotus Print & Custom Gift is not just a print shop. We are a boutique craft studio dedicated to turning ordinary photos and ideas into heirloom-grade keepsakes.
               </p>
               <p>
                 Every piece we create is personal, intentional, and meticulously crafted. Whether it's a framed wedding portrait, custom apparel, or premium digital branding, we treat your memories with the respect they deserve.
@@ -255,7 +255,7 @@ function App() {
             <div className="aspect-[4/5] rounded-2xl overflow-hidden relative border border-white/10">
               <img 
                 src="/images/about-workshop.png" 
-                alt="Lotus Design Workshop" 
+                alt="Lotus Print & Custom Gift Workshop" 
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B] via-transparent to-transparent opacity-80" />
@@ -493,18 +493,18 @@ function App() {
                   <p className="text-xl text-white/50 font-light mb-12">Ready to order or have a custom request? Send us a message on WhatsApp for the fastest response.</p>
                   
                   <div className="space-y-6 mb-12">
-                    <div className="flex items-center gap-4 text-white/80">
+                    <a href="tel:+9779848363025" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors">
                       <Phone className="w-6 h-6 text-[#D4AF37]" />
-                      <span className="text-lg">+977 9800000000</span>
-                    </div>
+                      <span className="text-lg">+977 9848363025</span>
+                    </a>
                     <div className="flex items-center gap-4 text-white/80">
-                      <MapPin className="w-6 h-6 text-[#D4AF37]" />
-                      <span className="text-lg">Kathmandu, Nepal</span>
+                      <MapPin className="w-6 h-6 text-[#D4AF37] shrink-0" />
+                      <span className="text-lg">Nepalgunj, Ranjha Airport, Banke, Nepal</span>
                     </div>
-                    <div className="flex items-center gap-4 text-white/80">
+                    <a href="mailto:lotusdesign977@gmail.com" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors">
                       <Mail className="w-6 h-6 text-[#D4AF37]" />
-                      <span className="text-lg">hello@lotusdesign.np</span>
-                    </div>
+                      <span className="text-lg">lotusdesign977@gmail.com</span>
+                    </a>
                   </div>
 
                   <Button 
@@ -529,7 +529,7 @@ function App() {
                     scrolling="no" 
                     marginHeight={0} 
                     marginWidth={0} 
-                    src="https://www.openstreetmap.org/export/embed.html?bbox=85.3116%2C27.7007%2C85.3316%2C27.7207&amp;layer=mapnik&amp;marker=27.7107%2C85.3216" 
+                    src="https://www.openstreetmap.org/export/embed.html?bbox=81.6571%2C28.0936%2C81.6771%2C28.1136&amp;layer=mapnik&amp;marker=28.1036%2C81.6671" 
                     className="grayscale contrast-125 brightness-75 invert filter"
                   ></iframe>
                 </motion.div>
@@ -545,7 +545,7 @@ function App() {
           <div className="text-2xl font-bold tracking-tight">Lotus<span className="text-[#D4AF37]">.</span></div>
           
           <div className="text-white/40 text-sm">
-            © {new Date().getFullYear()} Lotus Design. All rights reserved.
+            © {new Date().getFullYear()} Lotus Print &amp; Custom Gift. All rights reserved.
           </div>
 
           <div className="flex gap-4">
