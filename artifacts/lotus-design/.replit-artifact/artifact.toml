@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Lotus Design"
+version = "1.0.0"
+id = "artifacts/lotus-design"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22725
+
+[services.development]
+run = "pnpm --filter @workspace/lotus-design run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/lotus-design", "run", "build" ]
+publicDir = "artifacts/lotus-design/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22725"
+BASE_PATH = "/"

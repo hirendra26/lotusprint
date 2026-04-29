@@ -1,0 +1,94 @@
+Create an ultra-premium modern website for my business “Lotus Design” inspired by top Awwwards-winning websites like podmodturkey8.
+
+Style:
+Luxury, cinematic, interactive, bold, smooth, elegant, futuristic, immersive.
+
+Design Direction:
+- Fullscreen hero section with animated background video or premium motion graphics
+- Massive bold typography with modern font
+- Dark luxury theme with gold, white, and deep black accents
+- Glassmorphism + soft glow effects
+- Smooth scroll storytelling experience
+- Mouse-follow hover effects
+- GSAP / Framer Motion premium animations
+- Parallax image transitions
+- Micro interactions on every button and card
+- Premium loading screen animation
+- 3D layered sections
+
+Homepage Sections:
+1. Hero Section
+   - “We Create Personalized Gifts That Leave Memories”
+   - Subtitle: Photo Frames, T-Shirts, Cups, Printing & Branding
+   - Animated CTA buttons: Order Now / View Portfolio
+
+2. About Lotus Design
+   - Elegant split layout
+   - Show workshop / products visuals
+   - Text with motion reveal
+
+3. Services Showcase
+   - Custom Photo Frames
+   - Sublimation Printing
+   - Mug Printing
+   - T-Shirt Printing
+   - Visiting Cards
+   - Logo Design
+   - Flex / Banner Printing
+   - Digital Branding
+
+4. Product Gallery
+   - Masonry premium grid
+   - Hover zoom animation
+   - Category filter tabs
+
+5. Why Choose Us
+   - Fast Delivery
+   - Premium Quality
+   - Affordable Price
+   - Custom Orders
+   - Trusted by Customers
+
+6. Testimonials
+   - Animated cards
+   - Luxury typography
+
+7. Order Process
+   - Choose Product
+   - Upload Photo
+   - Confirm Design
+   - Fast Delivery
+
+8. Contact Section
+   - WhatsApp instant order button
+   - Facebook / Instagram
+   - Phone number
+   - Nepal location map
+
+9. Footer
+   - Elegant minimal footer with glowing icons
+
+Technical Requirements:
+- Fully responsive mobile + desktop
+- Super fast performance
+- SEO optimized
+- Modern React + Next.js + Tailwind CSS
+- GSAP animations
+- Smooth Lenis scroll
+- Framer motion transitions
+- cPanel ready export option
+
+Color Palette:
+Black #0B0B0B
+Gold #D4AF37
+White #FFFFFF
+Soft Gray #999
+
+Typography:
+Bold luxury sans-serif headlines
+Elegant clean body font
+
+Goal:
+Make visitors feel they entered a world-class premium design studio and instantly trust Lotus Design.
+
+Must feel like an Awwwards Site of the Day winner.

@@ -1,0 +1,62 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "qK9edZ0q_IRhFU3PZJFzZ"
+uri = "file://artifacts/lotus-design/public/images/hero-bg.png"
+type = "image"
+title = "Hero abstract dark gold mesh"
+
+[[generated]]
+id = "kmhROblC6_QetGlYQ3i7L"
+uri = "file://artifacts/lotus-design/public/images/about-workshop.png"
+type = "image"
+title = "Boutique craft studio workshop"
+
+[[generated]]
+id = "-tDJRD9G2NnU5N7eYViZs"
+uri = "file://artifacts/lotus-design/public/images/product-frame-1.png"
+type = "image"
+title = "Framed wedding portrait mockup"
+
+[[generated]]
+id = "GRy1H3DgCp_X2zEf71Ihu"
+uri = "file://artifacts/lotus-design/public/images/product-frame-2.png"
+type = "image"
+title = "Minimalist elegant photo frame"
+
+[[generated]]
+id = "n-2xqWjdBTx0b2SQU6dxj"
+uri = "file://artifacts/lotus-design/public/images/product-mug-1.png"
+type = "image"
+title = "Black ceramic mug mockup"
+
+[[generated]]
+id = "EhVMwQ05-sLOQ3bD7Tsay"
+uri = "file://artifacts/lotus-design/public/images/product-mug-2.png"
+type = "image"
+title = "Pair of elegant mugs"
+
+[[generated]]
+id = "HRr_AicTeQSQjm8hQH6uf"
+uri = "file://artifacts/lotus-design/public/images/product-tshirt-1.png"
+type = "image"
+title = "Premium black t-shirt mockup"
+
+[[generated]]
+id = "Fu9qgba0qAIxbxqZf4ENj"
+uri = "file://artifacts/lotus-design/public/images/product-tshirt-2.png"
+type = "image"
+title = "Hanging custom t-shirt"
+
+[[generated]]
+id = "dnf-McIrLJWC-tG4U04ls"
+uri = "file://artifacts/lotus-design/public/images/product-branding-1.png"
+type = "image"
+title = "Luxury business cards mockup"
+
+[[generated]]
+id = "obI6QO26bHy1Re-gIy6gW"
+uri = "file://artifacts/lotus-design/public/images/product-branding-2.png"
+type = "image"
+title = "Elegant packaging design"
