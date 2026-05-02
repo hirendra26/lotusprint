@@ -155,8 +155,8 @@ function App() {
       id: "bank",
       name: "Bank Transfer",
       tagline: "Direct bank / ConnectIPS transfer",
-      color: "#D4AF37",
-      textColor: "#000",
+      color: "#8B2FC9",
+      textColor: "#fff",
       icon: <Building2 className="w-6 h-6" />,
       badge: "All Banks",
       steps: [
@@ -186,7 +186,7 @@ function App() {
   ];
 
   return (
-    <div ref={containerRef} className="relative bg-[#0B0B0B] min-h-screen text-white font-sans overflow-hidden selection:bg-[#D4AF37] selection:text-black">
+    <div ref={containerRef} className="relative bg-[#0B0B0B] min-h-screen text-white font-sans overflow-hidden selection:bg-[#E91E8C] selection:text-black">
       <div className="mouse-spotlight hidden md:block pointer-events-none" />
 
       <AnimatePresence>
@@ -202,13 +202,15 @@ function App() {
               transition={{ duration: 1, ease: "easeOut" }}
               className="flex flex-col items-center"
             >
-              <h1 className="text-3xl md:text-5xl font-bold tracking-tighter text-white text-center">
-                Lotus <span className="text-gradient-gold">Print</span> &amp; Custom Gift
-              </h1>
+              <motion.img
+                src="/images/logo.png"
+                alt="Lotus Print & Custom Gift"
+                className="h-28 md:h-36 w-auto object-contain drop-shadow-[0_0_30px_rgba(233,30,140,0.4)]"
+              />
               <motion.div 
-                className="h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent mt-8"
+                className="h-[1px] bg-gradient-to-r from-transparent via-[#E91E8C] to-transparent mt-6"
                 initial={{ width: 0 }}
-                animate={{ width: "200px" }}
+                animate={{ width: "220px" }}
                 transition={{ duration: 1.5, delay: 0.5, ease: "easeInOut" }}
               />
             </motion.div>
@@ -217,8 +219,8 @@ function App() {
       </AnimatePresence>
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-40 px-6 py-6 md:px-12 flex justify-between items-center mix-blend-difference">
-        <div className="text-xl font-bold tracking-tight">Lotus<span className="text-[#D4AF37]">.</span></div>
+      <nav className="fixed top-0 left-0 right-0 z-40 px-6 py-6 md:px-12 flex justify-between items-center">
+        <img src="/images/logo.png" alt="Lotus Print & Custom Gift" className="h-10 w-auto object-contain" />
         <div className="hidden md:flex gap-8 text-sm font-medium text-white/70">
           <a href="#about" className="hover:text-white transition-colors">About</a>
           <a href="#services" className="hover:text-white transition-colors">Services</a>
@@ -253,9 +255,9 @@ function App() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 2.2, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-block mb-6 px-4 py-1.5 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/5 backdrop-blur-md"
+            className="inline-block mb-6 px-4 py-1.5 rounded-full border border-[#E91E8C]/30 bg-[#E91E8C]/5 backdrop-blur-md"
           >
-            <span className="text-xs md:text-sm font-medium text-[#D4AF37] uppercase tracking-wider">Premium Craft Studio · Nepalgunj, Banke</span>
+            <span className="text-xs md:text-sm font-medium text-[#E91E8C] uppercase tracking-wider">Premium Craft Studio · Nepalgunj, Banke</span>
           </motion.div>
           
           <motion.h1 
@@ -265,7 +267,7 @@ function App() {
             className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[1.1] mb-8"
           >
             We Create Gifts That <br />
-            <span className="text-gradient-gold italic font-serif pr-4">Leave Memories.</span>
+            <span className="text-gradient-brand italic font-serif pr-4">Leave Memories.</span>
           </motion.h1>
 
           <motion.p 
@@ -285,7 +287,7 @@ function App() {
           >
             <Button 
               onClick={() => window.open(whatsappLink, '_blank')}
-              className="h-14 px-8 bg-[#D4AF37] hover:bg-[#F3E5AB] text-black text-lg rounded-full font-semibold transition-all hover:scale-105 shadow-[0_0_30px_rgba(212,175,55,0.3)]"
+              className="h-14 px-8 bg-[#E91E8C] hover:bg-[#c9166e] text-white text-lg rounded-full font-semibold transition-all hover:scale-105 shadow-[0_0_30px_rgba(233,30,140,0.35)]"
             >
               Order Now <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
@@ -311,7 +313,7 @@ function App() {
           >
             <motion.h2 variants={fadeIn} className="text-4xl md:text-5xl font-bold tracking-tight mb-8">
               A luxury atelier where <br />
-              <span className="text-gradient-gold italic font-serif">memories are treated like fine art.</span>
+              <span className="text-gradient-brand italic font-serif">memories are treated like fine art.</span>
             </motion.h2>
             <motion.div variants={fadeIn} className="space-y-6 text-lg text-white/60 font-light">
               <p>
@@ -323,11 +325,11 @@ function App() {
             </motion.div>
             <motion.div variants={fadeIn} className="mt-12 flex gap-8">
               <div>
-                <h4 className="text-3xl font-bold text-[#D4AF37] mb-2">5+</h4>
+                <h4 className="text-3xl font-bold text-[#E91E8C] mb-2">5+</h4>
                 <p className="text-sm text-white/50 uppercase tracking-wider">Years Experience</p>
               </div>
               <div>
-                <h4 className="text-3xl font-bold text-[#D4AF37] mb-2">10k+</h4>
+                <h4 className="text-3xl font-bold text-[#E91E8C] mb-2">10k+</h4>
                 <p className="text-sm text-white/50 uppercase tracking-wider">Happy Clients</p>
               </div>
             </motion.div>
@@ -349,7 +351,7 @@ function App() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B] via-transparent to-transparent opacity-80" />
             </div>
             {/* Decorative element */}
-            <div className="absolute -bottom-8 -left-8 w-48 h-48 bg-[#D4AF37] rounded-full filter blur-[100px] opacity-20 pointer-events-none" />
+            <div className="absolute -bottom-8 -left-8 w-48 h-48 bg-[#E91E8C] rounded-full filter blur-[100px] opacity-20 pointer-events-none" />
           </motion.div>
         </div>
       </section>
@@ -377,10 +379,10 @@ function App() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                className="glass-card p-8 rounded-2xl group hover:border-[#D4AF37]/30 transition-all duration-300 relative overflow-hidden"
+                className="glass-card p-8 rounded-2xl group hover:border-[#E91E8C]/30 transition-all duration-300 relative overflow-hidden"
               >
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#D4AF37]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-[#D4AF37] mb-6 group-hover:scale-110 transition-transform duration-300">
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#E91E8C]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-[#E91E8C] mb-6 group-hover:scale-110 transition-transform duration-300">
                   {service.icon}
                 </div>
                 <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
@@ -408,11 +410,11 @@ function App() {
             
             <Tabs defaultValue="all" onValueChange={setActiveTab} className="w-full md:w-auto">
               <TabsList className="bg-white/5 border border-white/10 rounded-full p-1 w-full md:w-auto overflow-x-auto flex-nowrap hide-scrollbar">
-                <TabsTrigger value="all" className="rounded-full px-6 data-[state=active]:bg-[#D4AF37] data-[state=active]:text-black transition-all">All</TabsTrigger>
-                <TabsTrigger value="frames" className="rounded-full px-6 data-[state=active]:bg-[#D4AF37] data-[state=active]:text-black transition-all">Frames</TabsTrigger>
-                <TabsTrigger value="mugs" className="rounded-full px-6 data-[state=active]:bg-[#D4AF37] data-[state=active]:text-black transition-all">Mugs</TabsTrigger>
-                <TabsTrigger value="tshirts" className="rounded-full px-6 data-[state=active]:bg-[#D4AF37] data-[state=active]:text-black transition-all">T-Shirts</TabsTrigger>
-                <TabsTrigger value="branding" className="rounded-full px-6 data-[state=active]:bg-[#D4AF37] data-[state=active]:text-black transition-all">Branding</TabsTrigger>
+                <TabsTrigger value="all" className="rounded-full px-6 data-[state=active]:bg-[#E91E8C] data-[state=active]:text-black transition-all">All</TabsTrigger>
+                <TabsTrigger value="frames" className="rounded-full px-6 data-[state=active]:bg-[#E91E8C] data-[state=active]:text-black transition-all">Frames</TabsTrigger>
+                <TabsTrigger value="mugs" className="rounded-full px-6 data-[state=active]:bg-[#E91E8C] data-[state=active]:text-black transition-all">Mugs</TabsTrigger>
+                <TabsTrigger value="tshirts" className="rounded-full px-6 data-[state=active]:bg-[#E91E8C] data-[state=active]:text-black transition-all">T-Shirts</TabsTrigger>
+                <TabsTrigger value="branding" className="rounded-full px-6 data-[state=active]:bg-[#E91E8C] data-[state=active]:text-black transition-all">Branding</TabsTrigger>
               </TabsList>
             </Tabs>
           </motion.div>
@@ -436,7 +438,7 @@ function App() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div className="absolute bottom-0 left-0 p-6 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                    <span className="text-xs font-medium text-[#D4AF37] uppercase tracking-wider mb-2 block">{item.category}</span>
+                    <span className="text-xs font-medium text-[#E91E8C] uppercase tracking-wider mb-2 block">{item.category}</span>
                     <h3 className="text-xl font-medium text-white">{item.title}</h3>
                   </div>
                 </motion.div>
@@ -466,7 +468,7 @@ function App() {
                 { icon: <Heart />, title: "Made with Care", desc: "Every order is treated as a personal masterpiece." }
               ].map((item, idx) => (
                 <motion.div key={idx} variants={fadeIn} className="flex gap-6 items-start group">
-                  <div className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37] flex-shrink-0 group-hover:bg-[#D4AF37]/10 transition-colors">
+                  <div className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[#E91E8C] flex-shrink-0 group-hover:bg-[#E91E8C]/10 transition-colors">
                     {item.icon}
                   </div>
                   <div>
@@ -486,7 +488,7 @@ function App() {
             variants={staggerContainer}
             className="glass-card p-10 rounded-3xl relative overflow-hidden"
           >
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#D4AF37] rounded-full filter blur-[120px] opacity-10" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#E91E8C] rounded-full filter blur-[120px] opacity-10" />
             <motion.h2 variants={fadeIn} className="text-3xl md:text-4xl font-bold tracking-tight mb-12">How It Works</motion.h2>
             <div className="relative">
               <div className="absolute left-6 top-0 bottom-0 w-[1px] bg-white/10" />
@@ -498,7 +500,7 @@ function App() {
                   { step: "04", title: "Fast Delivery", desc: "Receive your beautifully crafted gift at your doorstep." }
                 ].map((item, idx) => (
                   <motion.div key={idx} variants={fadeIn} className="flex gap-8 relative">
-                    <div className="w-12 h-12 rounded-full bg-[#0B0B0B] border border-[#D4AF37] flex items-center justify-center text-[#D4AF37] font-bold z-10">
+                    <div className="w-12 h-12 rounded-full bg-[#0B0B0B] border border-[#E91E8C] flex items-center justify-center text-[#E91E8C] font-bold z-10">
                       {item.step}
                     </div>
                     <div className="pt-2">
@@ -532,7 +534,7 @@ function App() {
             variants={fadeIn}
             className="text-center mb-20"
           >
-            <span className="inline-block mb-4 px-4 py-1.5 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/5 text-xs font-medium text-[#D4AF37] uppercase tracking-wider">
+            <span className="inline-block mb-4 px-4 py-1.5 rounded-full border border-[#E91E8C]/30 bg-[#E91E8C]/5 text-xs font-medium text-[#E91E8C] uppercase tracking-wider">
               Secure Payments
             </span>
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">Pay Your Way</h2>
@@ -570,7 +572,7 @@ function App() {
                 </div>
                 <h3 className="text-xl font-bold mb-2">{method.name}</h3>
                 <p className="text-white/50 text-sm mb-6 leading-relaxed">{method.tagline}</p>
-                <div className="flex items-center gap-2 text-sm font-medium group-hover:text-[#D4AF37] transition-colors text-white/60">
+                <div className="flex items-center gap-2 text-sm font-medium group-hover:text-[#E91E8C] transition-colors text-white/60">
                   <span>How to pay</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -583,10 +585,10 @@ function App() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-12 glass-card rounded-2xl p-8 border border-[#D4AF37]/20"
+            className="mt-12 glass-card rounded-2xl p-8 border border-[#E91E8C]/20"
           >
             <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-              <div className="w-12 h-12 rounded-full bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37] flex-shrink-0">
+              <div className="w-12 h-12 rounded-full bg-[#E91E8C]/10 flex items-center justify-center text-[#E91E8C] flex-shrink-0">
                 <Building2 className="w-6 h-6" />
               </div>
               <div className="flex-1">
@@ -605,11 +607,11 @@ function App() {
                 <div className="bg-white/5 rounded-xl px-5 py-3 border border-white/10 flex items-center gap-3">
                   <div>
                     <p className="text-white/40 text-xs mb-1 uppercase tracking-wider">Account Number</p>
-                    <p className="font-mono font-bold text-[#D4AF37] text-lg tracking-widest">{bankDetails.accountNumber}</p>
+                    <p className="font-mono font-bold text-[#E91E8C] text-lg tracking-widest">{bankDetails.accountNumber}</p>
                   </div>
                   <button
                     onClick={() => copyToClipboard(bankDetails.accountNumber)}
-                    className="ml-2 p-2 rounded-lg bg-white/5 hover:bg-[#D4AF37]/20 transition-colors text-white/50 hover:text-[#D4AF37]"
+                    className="ml-2 p-2 rounded-lg bg-white/5 hover:bg-[#E91E8C]/20 transition-colors text-white/50 hover:text-[#E91E8C]"
                     title="Copy account number"
                   >
                     {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
@@ -692,10 +694,10 @@ function App() {
                     <div className="flex justify-between items-center text-sm">
                       <span className="text-white/40">Account No.</span>
                       <div className="flex items-center gap-2">
-                        <span className="font-mono font-bold text-[#D4AF37] tracking-wider">{bankDetails.accountNumber}</span>
+                        <span className="font-mono font-bold text-[#E91E8C] tracking-wider">{bankDetails.accountNumber}</span>
                         <button
                           onClick={() => copyToClipboard(bankDetails.accountNumber)}
-                          className="p-1.5 rounded-lg bg-white/5 hover:bg-[#D4AF37]/20 transition-colors text-white/50 hover:text-[#D4AF37]"
+                          className="p-1.5 rounded-lg bg-white/5 hover:bg-[#E91E8C]/20 transition-colors text-white/50 hover:text-[#E91E8C]"
                         >
                           {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                         </button>
@@ -706,7 +708,7 @@ function App() {
 
                 {method.note && (
                   <div className="flex gap-3 items-start bg-white/5 rounded-xl p-4 mb-6 border border-white/10">
-                    <AlertCircle className="w-4 h-4 text-[#D4AF37] flex-shrink-0 mt-0.5" />
+                    <AlertCircle className="w-4 h-4 text-[#E91E8C] flex-shrink-0 mt-0.5" />
                     <p className="text-white/60 text-sm">{method.note}</p>
                   </div>
                 )}
@@ -747,10 +749,10 @@ function App() {
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                 className="glass-card p-8 rounded-2xl relative"
               >
-                <Star className="text-[#D4AF37] w-8 h-8 mb-6 opacity-50" />
+                <Star className="text-[#E91E8C] w-8 h-8 mb-6 opacity-50" />
                 <p className="text-lg text-white/80 leading-relaxed mb-8 italic font-serif">"{test.quote}"</p>
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-[#D4AF37] font-bold text-lg">
+                  <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-[#E91E8C] font-bold text-lg">
                     {test.name.charAt(0)}
                   </div>
                   <div>
@@ -769,7 +771,7 @@ function App() {
         <div className="max-w-7xl mx-auto">
           <div className="glass-card rounded-[2.5rem] overflow-hidden border border-white/10 p-1 md:p-2">
             <div className="bg-[#0A0A0A] rounded-[2rem] p-10 md:p-20 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#D4AF37] rounded-full filter blur-[150px] opacity-5 pointer-events-none" />
+              <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#E91E8C] rounded-full filter blur-[150px] opacity-5 pointer-events-none" />
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 relative z-10">
                 <motion.div
@@ -783,15 +785,15 @@ function App() {
                   
                   <div className="space-y-6 mb-12">
                     <a href="tel:+9779848363025" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors">
-                      <Phone className="w-6 h-6 text-[#D4AF37]" />
+                      <Phone className="w-6 h-6 text-[#E91E8C]" />
                       <span className="text-lg">+977 9848363025</span>
                     </a>
                     <div className="flex items-center gap-4 text-white/80">
-                      <MapPin className="w-6 h-6 text-[#D4AF37] shrink-0" />
+                      <MapPin className="w-6 h-6 text-[#E91E8C] shrink-0" />
                       <span className="text-lg">Nepalgunj, Ranjha Airport, Banke, Nepal</span>
                     </div>
                     <a href="mailto:lotusdesign977@gmail.com" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors">
-                      <Mail className="w-6 h-6 text-[#D4AF37]" />
+                      <Mail className="w-6 h-6 text-[#E91E8C]" />
                       <span className="text-lg">lotusdesign977@gmail.com</span>
                     </a>
                   </div>
@@ -831,17 +833,17 @@ function App() {
       {/* Footer */}
       <footer className="py-12 px-6 md:px-12 border-t border-white/10 bg-[#050505] relative z-10 text-center md:text-left">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-2xl font-bold tracking-tight">Lotus<span className="text-[#D4AF37]">.</span></div>
+          <img src="/images/logo.png" alt="Lotus Print & Custom Gift" className="h-14 w-auto object-contain" />
           
           <div className="text-white/40 text-sm">
             © {new Date().getFullYear()} Lotus Print &amp; Custom Gift. All rights reserved.
           </div>
 
           <div className="flex gap-4">
-            <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-colors">
+            <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#E91E8C] hover:text-black transition-colors">
               <Facebook className="w-4 h-4" />
             </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition-colors">
+            <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#E91E8C] hover:text-black transition-colors">
               <Instagram className="w-4 h-4" />
             </a>
           </div>
