@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import Lenis from "lenis";
-import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useSpring, useInView } from "framer-motion";
 import { 
   ArrowRight, Gift, Phone, MapPin, Instagram, Facebook, Camera, Star, 
   Clock, Heart, Award, ShieldCheck, Mail, CheckCircle2,
@@ -21,6 +21,51 @@ const TikTokIcon = ({ className }: { className?: string }) => (
     <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/>
   </svg>
 );
+
+function useCounter(target: number, duration = 2000, start = false) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!start) return;
+    let startTime: number | null = null;
+    const step = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(eased * target));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [start, target, duration]);
+  return count;
+}
+
+const statsData = [
+  { value: 5000, suffix: "+", label: "Happy Customers", color: "#E91E8C" },
+  { value: 12000, suffix: "+", label: "Products Delivered", color: "#8B2FC9" },
+  { value: 100, suffix: "%", label: "Satisfaction Rate", color: "#2196F3" },
+  { value: 4, suffix: "+", label: "Years in Business", color: "#C4903A" },
+];
+
+function StatItem({ value, suffix, label, color, delay }: { value: number; suffix: string; label: string; color: string; delay: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const count = useCounter(value, 2200, inView);
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 30 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
+      className="flex flex-col items-center text-center px-6 relative group"
+    >
+      <span className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter tabular-nums" style={{ color }}>
+        {count.toLocaleString()}{suffix}
+      </span>
+      <span className="text-white/50 text-base mt-3 font-light tracking-wide">{label}</span>
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent md:hidden" />
+    </motion.div>
+  );
+}
 
 const fadeIn = {
   hidden: { opacity: 0, y: 40 },
@@ -365,6 +410,21 @@ function App() {
             {/* Decorative element */}
             <div className="absolute -bottom-8 -left-8 w-48 h-48 bg-[#E91E8C] rounded-full filter blur-[100px] opacity-20 pointer-events-none" />
           </motion.div>
+        </div>
+      </section>
+
+      {/* Stats Bar */}
+      <section className="py-20 relative z-10 bg-[#050505] border-t border-b border-white/5 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute left-1/4 top-1/2 -translate-y-1/2 w-64 h-64 bg-[#E91E8C] rounded-full blur-[120px] opacity-[0.04]" />
+          <div className="absolute right-1/4 top-1/2 -translate-y-1/2 w-64 h-64 bg-[#2196F3] rounded-full blur-[120px] opacity-[0.04]" />
+        </div>
+        <div className="max-w-6xl mx-auto px-6 md:px-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-0 md:divide-x md:divide-white/10">
+            {statsData.map((stat, i) => (
+              <StatItem key={i} {...stat} delay={i * 0.12} />
+            ))}
+          </div>
         </div>
       </section>
 
