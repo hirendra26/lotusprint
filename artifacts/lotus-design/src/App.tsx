@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import Lenis from "lenis";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring, useInView } from "framer-motion";
 import { 
@@ -79,6 +79,155 @@ const staggerContainer = {
     transition: { staggerChildren: 0.1 }
   }
 };
+
+const orderSteps = [
+  {
+    num: "01",
+    title: "Choose Your Product",
+    desc: "Browse our range of personalised products — mugs, frames, t-shirts, cushions, keychains, banners, and much more.",
+    detail: "Not sure what to pick? Send us a message on WhatsApp and our team will suggest the perfect product for your occasion.",
+    icon: <Gift className="w-8 h-8" />,
+    color: "#E91E8C",
+  },
+  {
+    num: "02",
+    title: "Send Your Details",
+    desc: "Share your photos, text, logos, or design ideas with us via WhatsApp. High-resolution images give the best print quality.",
+    detail: "We accept images via WhatsApp, Google Drive, or direct file transfer. Our team will guide you through exactly what we need.",
+    icon: <Smartphone className="w-8 h-8" />,
+    color: "#8B2FC9",
+  },
+  {
+    num: "03",
+    title: "Review Your Mockup",
+    desc: "We create a digital preview of your product before printing. You approve it, request changes, or give us the green light.",
+    detail: "We won't print a single item without your final approval. Your satisfaction is guaranteed from the very first step.",
+    icon: <CheckCircle2 className="w-8 h-8" />,
+    color: "#2196F3",
+  },
+  {
+    num: "04",
+    title: "Receive Your Order",
+    desc: "Your beautifully crafted product is delivered to your doorstep across Nepalgunj and Nepal — fast, safe, and packaged with care.",
+    detail: "Local delivery is available in Nepalgunj. For orders outside the city, we ship via trusted courier services.",
+    icon: <ArrowRight className="w-8 h-8" />,
+    color: "#C4903A",
+  },
+];
+
+function OrderStepPanel({
+  step, idx, onActive,
+}: {
+  step: typeof orderSteps[0];
+  idx: number;
+  onActive: (idx: number) => void;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { margin: "-35% 0px -35% 0px" });
+  useEffect(() => { if (inView) onActive(idx); }, [inView, idx, onActive]);
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, x: 30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      className="min-h-[65vh] flex items-center py-20 border-b border-white/5 last:border-0"
+    >
+      <div className="max-w-xl w-full">
+        <div
+          className="w-16 h-16 rounded-2xl flex items-center justify-center mb-8"
+          style={{ background: `${step.color}1A`, color: step.color }}
+        >
+          {step.icon}
+        </div>
+        <div className="flex items-center gap-4 mb-5">
+          <span className="text-5xl font-bold tabular-nums" style={{ color: step.color }}>{step.num}</span>
+          <h3 className="text-2xl md:text-3xl font-bold tracking-tight">{step.title}</h3>
+        </div>
+        <p className="text-white/60 text-lg font-light leading-relaxed mb-6">{step.desc}</p>
+        <p
+          className="text-white/35 text-sm leading-relaxed border-l-2 pl-4 py-1"
+          style={{ borderColor: step.color }}
+        >
+          {step.detail}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
+function HowToOrderSection({ whatsappLink }: { whatsappLink: string }) {
+  const [activeStep, setActiveStep] = useState(0);
+  const handleActive = useCallback((idx: number) => setActiveStep(idx), []);
+  return (
+    <div className="pt-16 pb-24 lg:grid lg:grid-cols-[280px_1fr] lg:gap-20">
+      {/* Sticky left — progress tracker */}
+      <div className="hidden lg:block">
+        <div className="sticky top-28 self-start">
+          <div className="relative pl-1">
+            <div className="absolute left-5 top-5 bottom-14 w-px bg-white/10" />
+            <motion.div
+              className="absolute left-5 top-5 w-px bg-gradient-to-b from-[#E91E8C] via-[#8B2FC9] to-[#2196F3] origin-top"
+              animate={{ height: `${(activeStep / (orderSteps.length - 1)) * (100 - 14)}%` }}
+              transition={{ duration: 0.45, ease: "easeInOut" }}
+            />
+            <div className="space-y-8">
+              {orderSteps.map((s, i) => (
+                <div key={i} className="flex items-center gap-4 relative">
+                  <motion.div
+                    animate={{
+                      backgroundColor: i <= activeStep ? s.color : "rgba(255,255,255,0.05)",
+                      borderColor: i <= activeStep ? s.color : "rgba(255,255,255,0.15)",
+                      scale: i === activeStep ? 1.15 : 1,
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="w-10 h-10 rounded-full border-2 flex items-center justify-center font-bold text-xs z-10 flex-shrink-0"
+                    style={{ color: i <= activeStep ? "#fff" : "rgba(255,255,255,0.3)" }}
+                  >
+                    {i < activeStep ? "✓" : s.num}
+                  </motion.div>
+                  <motion.span
+                    animate={{ opacity: i === activeStep ? 1 : 0.35, x: i === activeStep ? 4 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-sm font-semibold text-white leading-tight"
+                  >
+                    {s.title}
+                  </motion.span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="mt-12">
+            <Button
+              onClick={() => window.open(whatsappLink, "_blank")}
+              className="w-full h-12 bg-[#E91E8C] hover:bg-[#c9166e] text-white rounded-xl font-semibold transition-all shadow-[0_0_20px_rgba(233,30,140,0.3)]"
+            >
+              Start Your Order
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Scrollable step panels */}
+      <div>
+        {orderSteps.map((step, idx) => (
+          <OrderStepPanel key={idx} step={step} idx={idx} onActive={handleActive} />
+        ))}
+
+        {/* Mobile CTA */}
+        <div className="lg:hidden pt-8">
+          <Button
+            onClick={() => window.open(whatsappLink, "_blank")}
+            className="w-full h-14 bg-[#E91E8C] hover:bg-[#c9166e] text-white rounded-xl font-semibold text-lg transition-all"
+          >
+            Start Your Order
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -607,79 +756,53 @@ function App() {
         );
       })()}
 
-      {/* Why Choose Us & Order Process */}
+      {/* Why Choose Us */}
       <section className="py-32 px-6 md:px-12 relative z-10 border-t border-white/5 bg-[#0B0B0B]">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
-          
-          {/* Why Choose Us */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-          >
-            <motion.h2 variants={fadeIn} className="text-4xl md:text-5xl font-bold tracking-tight mb-12">The Lotus Standard</motion.h2>
-            <div className="space-y-8">
-              {[
-                { icon: <Clock />, title: "Fast Delivery", desc: "Timely execution without compromising on quality." },
-                { icon: <Award />, title: "Premium Quality", desc: "Only the finest materials and printing techniques." },
-                { icon: <ShieldCheck />, title: "Trusted Studio", desc: "Highly rated by thousands of customers across Nepal." },
-                { icon: <Heart />, title: "Made with Care", desc: "Every order is treated as a personal masterpiece." }
-              ].map((item, idx) => (
-                <motion.div key={idx} variants={fadeIn} className="flex gap-6 items-start group">
-                  <div className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[#E91E8C] flex-shrink-0 group-hover:bg-[#E91E8C]/10 transition-colors">
-                    {item.icon}
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                    <p className="text-white/50">{item.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+        <div className="max-w-7xl mx-auto">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="mb-16">
+            <p className="text-[#E91E8C] text-sm font-semibold uppercase tracking-widest mb-4">Why Lotus</p>
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tight">The Lotus Standard</h2>
           </motion.div>
-
-          {/* Order Process */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-            className="glass-card p-10 rounded-3xl relative overflow-hidden"
-          >
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#E91E8C] rounded-full filter blur-[120px] opacity-10" />
-            <motion.h2 variants={fadeIn} className="text-3xl md:text-4xl font-bold tracking-tight mb-12">How It Works</motion.h2>
-            <div className="relative">
-              <div className="absolute left-6 top-0 bottom-0 w-[1px] bg-white/10" />
-              <div className="space-y-10">
-                {[
-                  { step: "01", title: "Choose Product", desc: "Select from our range of premium customizable items." },
-                  { step: "02", title: "Upload Details", desc: "Send us your photos, logos, or design requirements." },
-                  { step: "03", title: "Confirm Design", desc: "We provide a mockup for your approval before printing." },
-                  { step: "04", title: "Fast Delivery", desc: "Receive your beautifully crafted gift at your doorstep." }
-                ].map((item, idx) => (
-                  <motion.div key={idx} variants={fadeIn} className="flex gap-8 relative">
-                    <div className="w-12 h-12 rounded-full bg-[#0B0B0B] border border-[#E91E8C] flex items-center justify-center text-[#E91E8C] font-bold z-10">
-                      {item.step}
-                    </div>
-                    <div className="pt-2">
-                      <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                      <p className="text-white/50">{item.desc}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-            <motion.div variants={fadeIn} className="mt-12 pt-8 border-t border-white/10">
-              <Button 
-                onClick={() => window.open(whatsappLink, '_blank')}
-                className="w-full h-14 bg-white hover:bg-gray-200 text-black text-lg rounded-xl font-semibold transition-all"
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { icon: <Clock className="w-6 h-6" />, title: "Fast Delivery", desc: "Timely execution without compromising on quality.", grad: "from-[#E91E8C]/10 to-transparent" },
+              { icon: <Award className="w-6 h-6" />, title: "Premium Quality", desc: "Only the finest materials and printing techniques.", grad: "from-[#8B2FC9]/10 to-transparent" },
+              { icon: <ShieldCheck className="w-6 h-6" />, title: "Trusted Studio", desc: "Highly rated by thousands of customers across Nepal.", grad: "from-[#2196F3]/10 to-transparent" },
+              { icon: <Heart className="w-6 h-6" />, title: "Made with Care", desc: "Every order is treated as a personal masterpiece.", grad: "from-[#C4903A]/10 to-transparent" },
+            ].map((item, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className={`glass-card rounded-2xl p-8 bg-gradient-to-b ${item.grad} group hover:border-white/20 transition-colors`}
               >
-                Start Your Order
-              </Button>
-            </motion.div>
+                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-[#E91E8C] mb-6 group-hover:scale-110 transition-transform">
+                  {item.icon}
+                </div>
+                <h3 className="text-lg font-semibold mb-3">{item.title}</h3>
+                <p className="text-white/50 text-sm leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How to Order — sticky progress */}
+      <section className="relative z-10 border-t border-white/5 bg-[#080808]">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+
+          {/* Section header */}
+          <motion.div
+            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            className="py-24 pb-0"
+          >
+            <p className="text-[#E91E8C] text-sm font-semibold uppercase tracking-widest mb-4">Simple Process</p>
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tight max-w-xl">How to Order in 4 Easy Steps</h2>
           </motion.div>
 
+          <HowToOrderSection whatsappLink={whatsappLink} />
         </div>
       </section>
 
