@@ -4,7 +4,8 @@ import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "fra
 import { 
   ArrowRight, Gift, Phone, MapPin, Instagram, Facebook, Camera, Star, 
   Clock, Heart, Award, ShieldCheck, Mail, CheckCircle2,
-  Printer, Image as ImageIcon, Briefcase, Shirt, MonitorSmartphone
+  Printer, Image as ImageIcon, Briefcase, Shirt, MonitorSmartphone,
+  CreditCard, Building2, Smartphone, Copy, Check, X, AlertCircle
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -98,6 +99,92 @@ function App() {
   const [activeTab, setActiveTab] = useState("all");
   const filteredPortfolio = activeTab === "all" ? portfolio : portfolio.filter(p => p.category === activeTab);
 
+  // Payment modal state
+  const [paymentModal, setPaymentModal] = useState(false);
+  const [selectedPayment, setSelectedPayment] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const bankDetails = {
+    bank: "Rastriya Banijya Bank",
+    accountName: "Lotus Print & Custom Gift",
+    accountNumber: "4400100000060001",
+  };
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const paymentMethods = [
+    {
+      id: "esewa",
+      name: "eSewa",
+      tagline: "Pay instantly with eSewa",
+      color: "#6DB54E",
+      textColor: "#fff",
+      icon: <Smartphone className="w-6 h-6" />,
+      badge: "Most Popular",
+      steps: [
+        "Open your eSewa app",
+        "Go to 'Send Money' or 'Pay'",
+        "Enter our eSewa ID: 9848363025",
+        "Enter the amount and confirm",
+        "Screenshot the payment and send via WhatsApp",
+      ],
+      note: "eSewa ID: 9848363025",
+    },
+    {
+      id: "khalti",
+      name: "Khalti",
+      tagline: "Pay with Khalti wallet",
+      color: "#5C2D91",
+      textColor: "#fff",
+      icon: <Smartphone className="w-6 h-6" />,
+      badge: "Fast & Secure",
+      steps: [
+        "Open your Khalti app",
+        "Tap 'Send Money'",
+        "Enter number: 9848363025",
+        "Enter the amount and confirm",
+        "Share the payment screenshot on WhatsApp",
+      ],
+      note: "Khalti number: 9848363025",
+    },
+    {
+      id: "bank",
+      name: "Bank Transfer",
+      tagline: "Direct bank / ConnectIPS transfer",
+      color: "#D4AF37",
+      textColor: "#000",
+      icon: <Building2 className="w-6 h-6" />,
+      badge: "All Banks",
+      steps: [
+        "Log in to your banking app or visit a branch",
+        "Transfer to our account below",
+        "Use 'Lotus Order' as the remark",
+        "Send the transaction receipt via WhatsApp",
+      ],
+      note: null,
+    },
+    {
+      id: "cod",
+      name: "Cash on Delivery",
+      tagline: "Pay when you receive your order",
+      color: "#fff",
+      textColor: "#000",
+      icon: <CreditCard className="w-6 h-6" />,
+      badge: "No Advance",
+      steps: [
+        "Place your order via WhatsApp",
+        "We confirm and prepare your item",
+        "Pay cash upon delivery",
+        "Available within Nepalgunj & nearby areas",
+      ],
+      note: "Available locally in Nepalgunj, Banke",
+    },
+  ];
+
   return (
     <div ref={containerRef} className="relative bg-[#0B0B0B] min-h-screen text-white font-sans overflow-hidden selection:bg-[#D4AF37] selection:text-black">
       <div className="mouse-spotlight hidden md:block pointer-events-none" />
@@ -136,6 +223,7 @@ function App() {
           <a href="#about" className="hover:text-white transition-colors">About</a>
           <a href="#services" className="hover:text-white transition-colors">Services</a>
           <a href="#portfolio" className="hover:text-white transition-colors">Portfolio</a>
+          <a href="#payment" className="hover:text-white transition-colors">Payment</a>
           <a href="#contact" className="hover:text-white transition-colors">Contact</a>
         </div>
         <Button 
@@ -433,6 +521,207 @@ function App() {
 
         </div>
       </section>
+
+      {/* Payment Methods Section */}
+      <section id="payment" className="py-32 px-6 md:px-12 relative z-10 border-t border-white/5 bg-[#0A0A0A]">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeIn}
+            className="text-center mb-20"
+          >
+            <span className="inline-block mb-4 px-4 py-1.5 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/5 text-xs font-medium text-[#D4AF37] uppercase tracking-wider">
+              Secure Payments
+            </span>
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">Pay Your Way</h2>
+            <p className="text-xl text-white/50 font-light max-w-2xl mx-auto">
+              We support all major payment methods trusted by customers across Nepal.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {paymentMethods.map((method, idx) => (
+              <motion.div
+                key={method.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                onClick={() => { setSelectedPayment(method.id); setPaymentModal(true); }}
+                className="glass-card p-8 rounded-2xl cursor-pointer group relative overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300"
+              >
+                <div
+                  className="absolute top-0 right-0 w-32 h-32 rounded-full filter blur-[60px] opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"
+                  style={{ backgroundColor: method.color }}
+                />
+                <div className="flex justify-between items-start mb-6">
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold"
+                    style={{ backgroundColor: method.color, color: method.textColor }}
+                  >
+                    {method.icon}
+                  </div>
+                  <span className="text-xs px-3 py-1 rounded-full border border-white/10 text-white/50 font-medium">
+                    {method.badge}
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold mb-2">{method.name}</h3>
+                <p className="text-white/50 text-sm mb-6 leading-relaxed">{method.tagline}</p>
+                <div className="flex items-center gap-2 text-sm font-medium group-hover:text-[#D4AF37] transition-colors text-white/60">
+                  <span>How to pay</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="mt-12 glass-card rounded-2xl p-8 border border-[#D4AF37]/20"
+          >
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
+              <div className="w-12 h-12 rounded-full bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37] flex-shrink-0">
+                <Building2 className="w-6 h-6" />
+              </div>
+              <div className="flex-1">
+                <h4 className="text-lg font-semibold mb-1">Bank Transfer Details</h4>
+                <p className="text-white/50 text-sm">Use ConnectIPS or any Nepal bank to transfer directly.</p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4 text-sm w-full md:w-auto">
+                <div className="bg-white/5 rounded-xl px-5 py-3 border border-white/10">
+                  <p className="text-white/40 text-xs mb-1 uppercase tracking-wider">Bank</p>
+                  <p className="font-medium text-white">{bankDetails.bank}</p>
+                </div>
+                <div className="bg-white/5 rounded-xl px-5 py-3 border border-white/10">
+                  <p className="text-white/40 text-xs mb-1 uppercase tracking-wider">Account Name</p>
+                  <p className="font-medium text-white">{bankDetails.accountName}</p>
+                </div>
+                <div className="bg-white/5 rounded-xl px-5 py-3 border border-white/10 flex items-center gap-3">
+                  <div>
+                    <p className="text-white/40 text-xs mb-1 uppercase tracking-wider">Account Number</p>
+                    <p className="font-mono font-bold text-[#D4AF37] text-lg tracking-widest">{bankDetails.accountNumber}</p>
+                  </div>
+                  <button
+                    onClick={() => copyToClipboard(bankDetails.accountNumber)}
+                    className="ml-2 p-2 rounded-lg bg-white/5 hover:bg-[#D4AF37]/20 transition-colors text-white/50 hover:text-[#D4AF37]"
+                    title="Copy account number"
+                  >
+                    {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Payment Modal */}
+      <AnimatePresence>
+        {paymentModal && selectedPayment && (() => {
+          const method = paymentMethods.find(m => m.id === selectedPayment)!;
+          return (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+              onClick={() => setPaymentModal(false)}
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                onClick={e => e.stopPropagation()}
+                className="relative bg-[#111] border border-white/10 rounded-3xl p-8 max-w-md w-full shadow-2xl overflow-hidden"
+              >
+                <div
+                  className="absolute top-0 right-0 w-64 h-64 rounded-full filter blur-[100px] opacity-10 pointer-events-none"
+                  style={{ backgroundColor: method.color }}
+                />
+                <button
+                  onClick={() => setPaymentModal(false)}
+                  className="absolute top-5 right-5 w-9 h-9 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/50 hover:text-white transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+
+                <div className="flex items-center gap-4 mb-8">
+                  <div
+                    className="w-14 h-14 rounded-2xl flex items-center justify-center"
+                    style={{ backgroundColor: method.color, color: method.textColor }}
+                  >
+                    {method.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold">{method.name}</h3>
+                    <p className="text-white/50 text-sm">{method.tagline}</p>
+                  </div>
+                </div>
+
+                <div className="space-y-4 mb-8">
+                  {method.steps.map((step, i) => (
+                    <div key={i} className="flex gap-4 items-start">
+                      <div
+                        className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5"
+                        style={{ backgroundColor: method.color, color: method.textColor }}
+                      >
+                        {i + 1}
+                      </div>
+                      <p className="text-white/70 text-sm leading-relaxed">{step}</p>
+                    </div>
+                  ))}
+                </div>
+
+                {method.id === "bank" && (
+                  <div className="bg-white/5 rounded-2xl p-5 mb-6 border border-white/10 space-y-3">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-white/40">Bank</span>
+                      <span className="font-medium">{bankDetails.bank}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-white/40">Name</span>
+                      <span className="font-medium">{bankDetails.accountName}</span>
+                    </div>
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-white/40">Account No.</span>
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono font-bold text-[#D4AF37] tracking-wider">{bankDetails.accountNumber}</span>
+                        <button
+                          onClick={() => copyToClipboard(bankDetails.accountNumber)}
+                          className="p-1.5 rounded-lg bg-white/5 hover:bg-[#D4AF37]/20 transition-colors text-white/50 hover:text-[#D4AF37]"
+                        >
+                          {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {method.note && (
+                  <div className="flex gap-3 items-start bg-white/5 rounded-xl p-4 mb-6 border border-white/10">
+                    <AlertCircle className="w-4 h-4 text-[#D4AF37] flex-shrink-0 mt-0.5" />
+                    <p className="text-white/60 text-sm">{method.note}</p>
+                  </div>
+                )}
+
+                <Button
+                  onClick={() => { setPaymentModal(false); window.open(whatsappLink, '_blank'); }}
+                  className="w-full h-12 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-xl font-semibold transition-all shadow-[0_0_20px_rgba(37,211,102,0.2)]"
+                >
+                  Confirm via WhatsApp
+                </Button>
+              </motion.div>
+            </motion.div>
+          );
+        })()}
+      </AnimatePresence>
 
       {/* Testimonials */}
       <section className="py-32 px-6 md:px-12 relative z-10 bg-[#0A0A0A]">
