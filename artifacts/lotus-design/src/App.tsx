@@ -967,6 +967,30 @@ function App() {
         </div>
       </footer>
 
+      {/* Floating WhatsApp Button */}
+      <motion.a
+        href={whatsappLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 3.5, type: "spring", stiffness: 260, damping: 20 }}
+        whileHover={{ scale: 1.12 }}
+        whileTap={{ scale: 0.95 }}
+        className="wa-fab fixed bottom-6 right-6 z-[300] w-16 h-16 rounded-full bg-[#25D366] flex items-center justify-center shadow-[0_4px_24px_rgba(37,211,102,0.45)] cursor-pointer"
+        title="Chat on WhatsApp"
+      >
+        {/* WhatsApp SVG */}
+        <svg viewBox="0 0 32 32" className="w-8 h-8 fill-white" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16.002 3C9.373 3 4 8.373 4 15.002c0 2.14.565 4.243 1.637 6.09L4 29l8.11-1.61A12.93 12.93 0 0 0 16.002 28C22.63 28 28 22.63 28 16.002 28 9.373 22.63 3 16.002 3zm0 2c5.523 0 10 4.477 10 10.002C26.002 20.525 21.524 26 16.002 26a10.93 10.93 0 0 1-5.49-1.48l-.394-.23-4.81.956.977-4.71-.257-.408A9.956 9.956 0 0 1 4.998 15c0-5.523 4.48-10 10.004-10zm-3.14 5.5c-.21 0-.547.079-.835.394-.287.315-1.097 1.073-1.097 2.616s1.123 3.033 1.28 3.243c.157.21 2.186 3.474 5.367 4.734 2.664 1.06 3.208.847 3.784.795.577-.052 1.863-.76 2.125-1.494.264-.734.264-1.363.184-1.494-.078-.131-.288-.21-.603-.368-.315-.158-1.863-.92-2.152-1.024-.289-.104-.5-.157-.71.158-.21.314-.813 1.023-.997 1.233-.184.21-.368.236-.683.079-.315-.158-1.33-.49-2.534-1.563-.937-.836-1.57-1.867-1.753-2.182-.184-.315-.02-.486.138-.643.14-.14.315-.367.472-.55.158-.184.21-.315.315-.525.105-.21.052-.394-.026-.552-.079-.157-.697-1.71-.96-2.34-.236-.576-.49-.498-.683-.507l-.632-.011z"/>
+        </svg>
+
+        {/* Tooltip */}
+        <span className="absolute right-[4.5rem] bg-[#111] text-white text-sm font-semibold px-4 py-2 rounded-full whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 shadow-lg border border-white/10 transition-opacity duration-200">
+          Chat on WhatsApp
+        </span>
+      </motion.a>
+
     </div>
   );
 }
