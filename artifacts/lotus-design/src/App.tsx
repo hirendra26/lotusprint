@@ -10,6 +10,18 @@ import {
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
+const socialLinks = {
+  facebook: "https://www.facebook.com/lotusdesign977",
+  instagram: "https://www.instagram.com/lotusprint977",
+  tiktok: "https://www.tiktok.com/@lotusdesign977",
+};
+
+const TikTokIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/>
+  </svg>
+);
+
 const fadeIn = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
@@ -804,6 +816,21 @@ function App() {
                   >
                     Chat on WhatsApp
                   </Button>
+
+                  <div className="flex items-center gap-4 mt-10">
+                    <span className="text-white/30 text-sm uppercase tracking-widest">Follow Us</span>
+                    <div className="flex gap-3">
+                      <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2] transition-all hover:scale-110" title="Facebook">
+                        <Facebook className="w-5 h-5" />
+                      </a>
+                      <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:bg-[#E91E8C] hover:text-white hover:border-[#E91E8C] transition-all hover:scale-110" title="Instagram">
+                        <Instagram className="w-5 h-5" />
+                      </a>
+                      <a href={socialLinks.tiktok} target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:bg-white hover:text-black hover:border-white transition-all hover:scale-110" title="TikTok">
+                        <TikTokIcon className="w-5 h-5" />
+                      </a>
+                    </div>
+                  </div>
                 </motion.div>
 
                 <motion.div
@@ -839,12 +866,15 @@ function App() {
             © {new Date().getFullYear()} Lotus Print &amp; Custom Gift. All rights reserved.
           </div>
 
-          <div className="flex gap-4">
-            <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#E91E8C] hover:text-black transition-colors">
+          <div className="flex gap-3">
+            <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#1877F2] hover:border-[#1877F2] transition-all hover:scale-110" title="Facebook">
               <Facebook className="w-4 h-4" />
             </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#E91E8C] hover:text-black transition-colors">
+            <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#E91E8C] hover:border-[#E91E8C] transition-all hover:scale-110" title="Instagram">
               <Instagram className="w-4 h-4" />
+            </a>
+            <a href={socialLinks.tiktok} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white hover:text-black hover:border-white transition-all hover:scale-110" title="TikTok">
+              <TikTokIcon className="w-4 h-4" />
             </a>
           </div>
         </div>
