@@ -460,6 +460,93 @@ function App() {
         </div>
       </section>
 
+      {/* Work Reel */}
+      {(() => {
+        const reelRow1 = [
+          { name: "Photo Mug", cat: "Drinkware", tag: "Best Seller", gradient: "from-[#E91E8C] to-[#8B2FC9]", icon: <Camera className="w-7 h-7" /> },
+          { name: "Custom T-Shirt", cat: "Apparel", tag: "Fan Favourite", gradient: "from-[#8B2FC9] to-[#2196F3]", icon: <Shirt className="w-7 h-7" /> },
+          { name: "Canvas Print", cat: "Wall Art", tag: "Premium", gradient: "from-[#2196F3] to-[#E91E8C]", icon: <ImageIcon className="w-7 h-7" /> },
+          { name: "Gift Hamper", cat: "Gifting", tag: "New", gradient: "from-[#E91E8C] to-[#ff6b6b]", icon: <Gift className="w-7 h-7" /> },
+          { name: "Photo Frame", cat: "Décor", tag: "Top Rated", gradient: "from-[#C4903A] to-[#E91E8C]", icon: <ImageIcon className="w-7 h-7" /> },
+          { name: "Business Card", cat: "Branding", tag: "Popular", gradient: "from-[#8B2FC9] to-[#C4903A]", icon: <Briefcase className="w-7 h-7" /> },
+          { name: "Keychain", cat: "Accessories", tag: "Trending", gradient: "from-[#2196F3] to-[#8B2FC9]", icon: <Star className="w-7 h-7" /> },
+          { name: "Laptop Sleeve", cat: "Tech", tag: "Premium", gradient: "from-[#E91E8C] to-[#2196F3]", icon: <MonitorSmartphone className="w-7 h-7" /> },
+        ];
+        const reelRow2 = [
+          { name: "Photo Cushion", cat: "Home", tag: "Best Seller", gradient: "from-[#2196F3] to-[#E91E8C]", icon: <Heart className="w-7 h-7" /> },
+          { name: "Banner Print", cat: "Advertising", tag: "Commercial", gradient: "from-[#8B2FC9] to-[#E91E8C]", icon: <Printer className="w-7 h-7" /> },
+          { name: "Birthday Card", cat: "Stationery", tag: "Personalised", gradient: "from-[#E91E8C] to-[#C4903A]", icon: <Star className="w-7 h-7" /> },
+          { name: "Magic Mug", cat: "Drinkware", tag: "Unique", gradient: "from-[#C4903A] to-[#2196F3]", icon: <Camera className="w-7 h-7" /> },
+          { name: "Tote Bag", cat: "Accessories", tag: "Eco-Friendly", gradient: "from-[#2196F3] to-[#C4903A]", icon: <Gift className="w-7 h-7" /> },
+          { name: "Printed Hoodie", cat: "Apparel", tag: "Cosy Pick", gradient: "from-[#8B2FC9] to-[#ff6b6b]", icon: <Shirt className="w-7 h-7" /> },
+          { name: "Desk Plaque", cat: "Corporate", tag: "Gifting", gradient: "from-[#E91E8C] to-[#8B2FC9]", icon: <Award className="w-7 h-7" /> },
+          { name: "Sticker Pack", cat: "Branding", tag: "Fun", gradient: "from-[#2196F3] to-[#E91E8C]", icon: <Smartphone className="w-7 h-7" /> },
+        ];
+        const ReelCard = ({ item }: { item: typeof reelRow1[0] }) => (
+          <div className="flex-shrink-0 w-52 h-64 mx-3 rounded-2xl overflow-hidden relative group cursor-pointer select-none">
+            <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-80`} />
+            <div className="absolute inset-0 bg-black/20" />
+            <div className="relative z-10 h-full flex flex-col justify-between p-6">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-widest bg-white/20 text-white rounded-full px-3 py-1 backdrop-blur-sm">
+                  {item.tag}
+                </span>
+              </div>
+              <div>
+                <div className="w-14 h-14 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {item.icon}
+                </div>
+                <p className="text-white/70 text-xs uppercase tracking-widest mb-1">{item.cat}</p>
+                <h3 className="text-white font-bold text-lg leading-tight">{item.name}</h3>
+              </div>
+            </div>
+          </div>
+        );
+        return (
+          <section className="py-24 relative z-10 bg-[#080808] border-t border-white/5 overflow-hidden">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 mb-14">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeIn}
+                className="flex flex-col md:flex-row md:items-end justify-between gap-4"
+              >
+                <div>
+                  <p className="text-[#E91E8C] text-sm font-semibold uppercase tracking-widest mb-3">What We Make</p>
+                  <h2 className="text-4xl md:text-6xl font-bold tracking-tight">From Our Studio</h2>
+                </div>
+                <p className="text-white/40 text-lg max-w-sm font-light">Every product is made with care, precision, and a personal touch.</p>
+              </motion.div>
+            </div>
+
+            <div className="space-y-5 reel-track">
+              {/* Row 1 — scrolls left */}
+              <div className="overflow-hidden">
+                <div className="flex animate-marquee-left w-max">
+                  {[...reelRow1, ...reelRow1].map((item, i) => <ReelCard key={i} item={item} />)}
+                </div>
+              </div>
+              {/* Row 2 — scrolls right */}
+              <div className="overflow-hidden">
+                <div className="flex animate-marquee-right w-max">
+                  {[...reelRow2, ...reelRow2].map((item, i) => <ReelCard key={i} item={item} />)}
+                </div>
+              </div>
+            </div>
+
+            <div className="max-w-7xl mx-auto px-6 md:px-12 mt-14 text-center">
+              <Button
+                onClick={() => window.open(whatsappLink, '_blank')}
+                className="h-14 px-10 bg-transparent border border-white/20 text-white hover:bg-white/5 rounded-full text-base font-semibold transition-all"
+              >
+                Order Any of These <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+            </div>
+          </section>
+        );
+      })()}
+
       {/* Why Choose Us & Order Process */}
       <section className="py-32 px-6 md:px-12 relative z-10 border-t border-white/5 bg-[#0B0B0B]">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
