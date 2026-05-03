@@ -1306,6 +1306,56 @@ function App() {
         );
       })()}
 
+      {/* FAQ Section */}
+      <section className="py-32 px-6 md:px-12 relative z-10 border-t border-white/5 bg-[#0A0A0A] overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-80 h-80 bg-[#E91E8C] rounded-full blur-[160px] opacity-[0.03]" />
+          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-[#2196F3] rounded-full blur-[160px] opacity-[0.03]" />
+        </div>
+        <div className="max-w-5xl mx-auto relative z-10">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeIn}
+            className="text-center mb-16"
+          >
+            <span className="inline-block mb-5 px-4 py-1.5 rounded-full border border-[#2196F3]/30 bg-[#2196F3]/5 text-xs font-semibold text-[#2196F3] uppercase tracking-widest">
+              Frequently Asked Questions
+            </span>
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">Everything You Need to Know</h2>
+            <p className="text-xl text-white/40 font-light max-w-2xl mx-auto">
+              Quick answers to the questions customers ask most before placing an order.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 gap-4">
+            {[
+              { q: "How long does delivery take?", a: "Most orders are ready within 1–3 days depending on quantity and complexity. Bulk orders may take a bit longer." },
+              { q: "Can I send my own design or photo?", a: "Yes — send us your photo, logo, text, or reference image on WhatsApp and we’ll handle the rest." },
+              { q: "Do you do bulk and corporate orders?", a: "Absolutely. We handle weddings, offices, schools, events, and branded merchandise with bulk pricing." },
+              { q: "What file formats do you accept?", a: "JPG, PNG, PDF, and vector files are all accepted. Higher resolution files give the best print results." },
+              { q: "Can I pay on delivery?", a: "Yes, Cash on Delivery is available for selected orders. We also support eSewa, Khalti, and bank transfer." },
+            ].map((item, idx) => (
+              <details
+                key={idx}
+                className="group glass-card rounded-2xl border border-white/10 overflow-hidden transition-all"
+              >
+                <summary className="cursor-pointer list-none px-6 md:px-8 py-5 flex items-center justify-between gap-6">
+                  <span className="text-lg md:text-xl font-medium text-white">{item.q}</span>
+                  <span className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-[#E91E8C] group-open:bg-[#E91E8C] group-open:text-black transition-all flex-shrink-0">
+                    +
+                  </span>
+                </summary>
+                <div className="px-6 md:px-8 pb-6 pt-0 text-white/45 leading-relaxed">
+                  {item.a}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section id="contact" className="py-32 px-6 md:px-12 relative z-10 border-t border-white/5 bg-[#0B0B0B]">
         <div className="max-w-7xl mx-auto">
