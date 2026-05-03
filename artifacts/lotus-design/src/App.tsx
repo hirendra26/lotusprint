@@ -1194,6 +1194,118 @@ function App() {
         );
       })()}
 
+      {/* Pricing Guide */}
+      {(() => {
+        const pricingItems = [
+          { icon: <Camera className="w-5 h-5" />, name: "Photo Mug", price: "350", unit: "per piece", note: "11oz ceramic", tag: null, color: "#E91E8C" },
+          { icon: <Camera className="w-5 h-5" />, name: "Magic Mug", price: "500", unit: "per piece", note: "Color-changing", tag: "Popular", color: "#8B2FC9" },
+          { icon: <Shirt className="w-5 h-5" />, name: "Custom T-Shirt", price: "450", unit: "per piece", note: "DTF/screen print", tag: "Best Seller", color: "#2196F3" },
+          { icon: <ImageIcon className="w-5 h-5" />, name: "Canvas Print", price: "800", unit: "per piece", note: "12×16 inch", tag: null, color: "#E91E8C" },
+          { icon: <ImageIcon className="w-5 h-5" />, name: "Photo Frame", price: "300", unit: "per piece", note: "With print", tag: null, color: "#C4903A" },
+          { icon: <Heart className="w-5 h-5" />, name: "Cushion Print", price: "600", unit: "per piece", note: "12×12 inch", tag: null, color: "#8B2FC9" },
+          { icon: <Star className="w-5 h-5" />, name: "Keychain", price: "150", unit: "per piece", note: "Acrylic/metal", tag: "Great Gift", color: "#2196F3" },
+          { icon: <Gift className="w-5 h-5" />, name: "Birthday Card", price: "100", unit: "per piece", note: "Custom design", tag: null, color: "#E91E8C" },
+          { icon: <Briefcase className="w-5 h-5" />, name: "Business Cards", price: "500", unit: "per 100 pcs", note: "Glossy / matte", tag: "Bulk Discount", color: "#C4903A" },
+          { icon: <Printer className="w-5 h-5" />, name: "Banner Print", price: "200", unit: "per sq.ft", note: "Flex / vinyl", tag: null, color: "#8B2FC9" },
+          { icon: <MonitorSmartphone className="w-5 h-5" />, name: "Laptop Sleeve", price: "700", unit: "per piece", note: "Custom printed", tag: null, color: "#2196F3" },
+          { icon: <Gift className="w-5 h-5" />, name: "Tote Bag", price: "350", unit: "per piece", note: "Printed canvas", tag: "Eco-Friendly", color: "#E91E8C" },
+        ];
+        return (
+          <section className="py-32 px-6 md:px-12 relative z-10 border-t border-white/5 bg-[#0B0B0B] overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute top-1/3 left-0 w-80 h-80 bg-[#8B2FC9] rounded-full blur-[160px] opacity-[0.04]" />
+              <div className="absolute bottom-1/3 right-0 w-80 h-80 bg-[#E91E8C] rounded-full blur-[160px] opacity-[0.04]" />
+            </div>
+            <div className="max-w-7xl mx-auto relative z-10">
+              {/* Header */}
+              <motion.div
+                initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+                className="text-center mb-20"
+              >
+                <span className="inline-block mb-5 px-4 py-1.5 rounded-full border border-[#8B2FC9]/30 bg-[#8B2FC9]/5 text-xs font-semibold text-[#8B2FC9] uppercase tracking-widest">
+                  Transparent Pricing
+                </span>
+                <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">Starting Prices</h2>
+                <p className="text-xl text-white/40 font-light max-w-2xl mx-auto">
+                  All prices are in Nepali Rupees (NPR) and start from the amounts shown. Final price depends on design complexity, quantity, and customisation.
+                </p>
+              </motion.div>
+
+              {/* Pricing grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                {pricingItems.map((item, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                    className="group relative glass-card rounded-2xl p-5 hover:border-white/20 transition-all duration-300 cursor-default overflow-hidden"
+                  >
+                    {/* Tag badge */}
+                    {item.tag && (
+                      <span
+                        className="absolute top-3 right-3 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full"
+                        style={{ background: `${item.color}22`, color: item.color }}
+                      >
+                        {item.tag}
+                      </span>
+                    )}
+
+                    {/* Icon */}
+                    <div
+                      className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
+                      style={{ background: `${item.color}18`, color: item.color }}
+                    >
+                      {item.icon}
+                    </div>
+
+                    {/* Name */}
+                    <p className="text-sm font-semibold text-white/80 mb-3 leading-tight">{item.name}</p>
+
+                    {/* Price */}
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-white/40 text-xs">Rs.</span>
+                      <span className="text-2xl font-bold tracking-tight" style={{ color: item.color }}>{item.price}</span>
+                      <span className="text-white/30 text-[11px]">+</span>
+                    </div>
+                    <p className="text-white/30 text-[11px] mt-0.5">{item.unit}</p>
+
+                    {/* Note */}
+                    <p className="text-white/25 text-[11px] mt-2 border-t border-white/5 pt-2">{item.note}</p>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Disclaimer + CTA */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+                className="mt-14 flex flex-col md:flex-row items-center justify-between gap-6 glass-card rounded-2xl px-8 py-6"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-[#E91E8C]/10 flex items-center justify-center text-[#E91E8C] flex-shrink-0 mt-0.5">
+                    <AlertCircle className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-white/80 font-medium mb-1">Need a custom quote?</p>
+                    <p className="text-white/40 text-sm">Prices vary by quantity, material &amp; design. Bulk orders get special discounts. Send us your requirements and we'll give you an exact price — no hidden fees.</p>
+                  </div>
+                </div>
+                <Button
+                  onClick={() => window.open(`https://wa.me/9779848363025?text=${encodeURIComponent("Hello! I'd like to get a price quote for my order. Can you help?")}`, "_blank")}
+                  className="flex-shrink-0 h-12 px-8 bg-[#E91E8C] hover:bg-[#c9166e] text-white rounded-full font-semibold transition-all shadow-[0_0_20px_rgba(233,30,140,0.25)] whitespace-nowrap"
+                >
+                  Get Free Quote
+                </Button>
+              </motion.div>
+            </div>
+          </section>
+        );
+      })()}
+
       {/* Contact Section */}
       <section id="contact" className="py-32 px-6 md:px-12 relative z-10 border-t border-white/5 bg-[#0B0B0B]">
         <div className="max-w-7xl mx-auto">
