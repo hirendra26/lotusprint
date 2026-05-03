@@ -1048,6 +1048,152 @@ function App() {
         </div>
       </section>
 
+      {/* Special Occasions */}
+      {(() => {
+        const occasions = [
+          {
+            emoji: "🎂",
+            title: "Birthdays",
+            subtitle: "Make their day unforgettable",
+            gradient: "from-[#E91E8C]/20 via-[#8B2FC9]/10 to-transparent",
+            border: "border-[#E91E8C]/20 hover:border-[#E91E8C]/50",
+            glow: "rgba(233,30,140,0.15)",
+            color: "#E91E8C",
+            products: ["Photo Mug", "Cushion Print", "Birthday Card", "Photo Frame", "Keychain", "Magic Mug"],
+            msg: "Hello! I need a birthday gift — can you help me pick something special?",
+          },
+          {
+            emoji: "💍",
+            title: "Weddings",
+            subtitle: "Gifts as timeless as your love",
+            gradient: "from-[#C4903A]/20 via-[#8B2FC9]/10 to-transparent",
+            border: "border-[#C4903A]/20 hover:border-[#C4903A]/50",
+            glow: "rgba(196,144,58,0.15)",
+            color: "#C4903A",
+            products: ["Couple Photo Frame", "Canvas Print", "Custom Pillow", "Memory Book", "Engraved Keychain", "Couple Mugs"],
+            msg: "Hello! I'm looking for a wedding gift. Can you suggest some personalised options?",
+          },
+          {
+            emoji: "❤️",
+            title: "Anniversaries",
+            subtitle: "Celebrate every milestone in style",
+            gradient: "from-[#8B2FC9]/20 via-[#E91E8C]/10 to-transparent",
+            border: "border-[#8B2FC9]/20 hover:border-[#8B2FC9]/50",
+            glow: "rgba(139,47,201,0.15)",
+            color: "#8B2FC9",
+            products: ["Canvas Print", "Couple Frame", "Love Keychain", "Photo Book", "Custom T-Shirt", "Heart Cushion"],
+            msg: "Hello! I need an anniversary gift idea. Can you help me create something special?",
+          },
+          {
+            emoji: "🏢",
+            title: "Corporate",
+            subtitle: "Brand gifts that leave an impression",
+            gradient: "from-[#2196F3]/20 via-[#8B2FC9]/10 to-transparent",
+            border: "border-[#2196F3]/20 hover:border-[#2196F3]/50",
+            glow: "rgba(33,150,243,0.15)",
+            color: "#2196F3",
+            products: ["Business Cards", "Branded Mugs", "Logo T-Shirts", "Event Banners", "Desk Plaque", "Branded Stickers"],
+            msg: "Hello! I need corporate branded gifts for our company. Can we discuss bulk order options?",
+          },
+        ];
+        return (
+          <section className="py-32 px-6 md:px-12 relative z-10 border-t border-white/5 bg-[#0A0A0A] overflow-hidden">
+            {/* Background blobs */}
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#E91E8C] rounded-full blur-[160px] opacity-[0.03]" />
+              <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#2196F3] rounded-full blur-[160px] opacity-[0.03]" />
+            </div>
+
+            <div className="max-w-7xl mx-auto relative z-10">
+              {/* Header */}
+              <motion.div
+                initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+                className="text-center mb-20"
+              >
+                <span className="inline-block mb-5 px-4 py-1.5 rounded-full border border-[#E91E8C]/30 bg-[#E91E8C]/5 text-xs font-semibold text-[#E91E8C] uppercase tracking-widest">
+                  Perfect For Every Occasion
+                </span>
+                <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">Gifts for Every Moment</h2>
+                <p className="text-xl text-white/40 font-light max-w-2xl mx-auto">
+                  Whatever the celebration, we have the perfect personalised gift to make it truly memorable.
+                </p>
+              </motion.div>
+
+              {/* Cards grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {occasions.map((occ, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 32 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.7, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                    onClick={() => window.open(`https://wa.me/9779848363025?text=${encodeURIComponent(occ.msg)}`, "_blank")}
+                    whileHover={{ y: -6 }}
+                    className={`group relative rounded-3xl border bg-gradient-to-br ${occ.gradient} ${occ.border} p-8 md:p-10 cursor-pointer transition-all duration-300 overflow-hidden`}
+                    style={{ boxShadow: `0 0 0 0 ${occ.glow}` }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    {/* Hover glow */}
+                    <div
+                      className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                      style={{ boxShadow: `inset 0 0 60px ${occ.glow}` }}
+                    />
+
+                    <div className="relative z-10">
+                      {/* Top row */}
+                      <div className="flex items-start justify-between mb-8">
+                        <div>
+                          <span className="text-5xl mb-4 block">{occ.emoji}</span>
+                          <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-2">{occ.title}</h3>
+                          <p className="text-white/50 text-sm font-light">{occ.subtitle}</p>
+                        </div>
+                        <motion.div
+                          className="w-11 h-11 rounded-full border flex items-center justify-center flex-shrink-0 mt-1 transition-all duration-300"
+                          style={{ borderColor: occ.color, color: occ.color }}
+                          whileHover={{ rotate: 45 }}
+                        >
+                          <ArrowRight className="w-5 h-5" />
+                        </motion.div>
+                      </div>
+
+                      {/* Product tags */}
+                      <div className="flex flex-wrap gap-2">
+                        {occ.products.map((p, i) => (
+                          <span
+                            key={i}
+                            className="text-xs font-medium px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/60 group-hover:border-white/20 group-hover:text-white/80 transition-all duration-300"
+                          >
+                            {p}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* CTA line */}
+                      <div className="mt-8 flex items-center gap-2 text-sm font-semibold" style={{ color: occ.color }}>
+                        <span>Order via WhatsApp</span>
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Bottom note */}
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5 }}
+                className="text-center text-white/30 text-sm mt-12"
+              >
+                Bulk orders available for weddings &amp; corporate events · Same-day consultation on WhatsApp
+              </motion.p>
+            </div>
+          </section>
+        );
+      })()}
+
       {/* Contact Section */}
       <section id="contact" className="py-32 px-6 md:px-12 relative z-10 border-t border-white/5 bg-[#0B0B0B]">
         <div className="max-w-7xl mx-auto">
