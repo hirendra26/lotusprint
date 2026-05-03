@@ -67,10 +67,10 @@ function StatItem({ value, suffix, label, color, delay }: { value: number; suffi
   );
 }
 
-const fadeIn = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-};
+  const fadeIn = {
+    hidden: { opacity: 0, y: 18 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } }
+  };
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -690,7 +690,7 @@ function App() {
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 2.8 }}
+                transition={{ duration: 0.8, delay: 2.6 }}
             className="flex flex-col sm:flex-row gap-6"
           >
             <Button 
@@ -800,12 +800,12 @@ function App() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                className="glass-card p-8 rounded-2xl group hover:border-[#E91E8C]/30 transition-all duration-300 relative overflow-hidden"
+                transition={{ duration: 0.45, delay: idx * 0.08, ease: "easeOut" }}
+                whileHover={{ y: -4, transition: { duration: 0.18 } }}
+                className="glass-card p-8 rounded-3xl group hover:border-[#E91E8C]/30 transition-all duration-300 relative overflow-hidden"
               >
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#E91E8C]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-[#E91E8C] mb-6 group-hover:scale-110 transition-transform duration-300">
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#E91E8C]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-[#E91E8C] mb-6 group-hover:scale-105 transition-transform duration-300">
                   {service.icon}
                 </div>
                 <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
@@ -1052,18 +1052,18 @@ function App() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                transition={{ duration: 0.4, delay: idx * 0.08, ease: "easeOut" }}
+                whileHover={{ y: -4, transition: { duration: 0.18 } }}
                 onClick={() => { setSelectedPayment(method.id); setPaymentModal(true); }}
-                className="glass-card p-8 rounded-2xl cursor-pointer group relative overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300"
+                className="glass-card p-8 rounded-3xl cursor-pointer group relative overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300"
               >
                 <div
-                  className="absolute top-0 right-0 w-32 h-32 rounded-full filter blur-[60px] opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"
+                  className="absolute top-0 right-0 w-32 h-32 rounded-full filter blur-[60px] opacity-0 group-hover:opacity-18 transition-opacity duration-500 pointer-events-none"
                   style={{ backgroundColor: method.color }}
                 />
                 <div className="flex justify-between items-start mb-6">
                   <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold"
+                    className="w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold shadow-[0_10px_30px_rgba(0,0,0,0.18)]"
                     style={{ backgroundColor: method.color, color: method.textColor }}
                   >
                     {method.icon}
@@ -1087,7 +1087,7 @@ function App() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-12 glass-card rounded-2xl p-8 border border-[#E91E8C]/20"
+            className="mt-12 glass-card rounded-3xl p-8 border border-[#E91E8C]/20"
           >
             <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
               <div className="w-12 h-12 rounded-full bg-[#E91E8C]/10 flex items-center justify-center text-[#E91E8C] flex-shrink-0">
