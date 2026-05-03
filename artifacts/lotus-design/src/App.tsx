@@ -5,7 +5,7 @@ import {
   ArrowRight, Gift, Phone, MapPin, Instagram, Facebook, Camera, Star, 
   Clock, Heart, Award, ShieldCheck, Mail, CheckCircle2,
   Printer, Image as ImageIcon, Briefcase, Shirt, MonitorSmartphone,
-  CreditCard, Building2, Smartphone, Copy, Check, X, AlertCircle
+  CreditCard, Building2, Smartphone, Copy, Check, X, AlertCircle, Menu
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -229,6 +229,54 @@ function HowToOrderSection({ whatsappLink }: { whatsappLink: string }) {
   );
 }
 
+function FaqItem({ q, a, idx }: { q: string; a: string; idx: number }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: idx * 0.07, ease: [0.16, 1, 0.3, 1] }}
+      className="border border-white/10 rounded-2xl overflow-hidden hover:border-white/20 transition-colors duration-300 bg-white/[0.03]"
+    >
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="w-full px-6 md:px-8 py-5 flex items-center justify-between gap-6 text-left"
+        aria-expanded={open}
+      >
+        <span className="text-base md:text-lg font-semibold text-white/90">{q}</span>
+        <motion.div
+          animate={{
+            rotate: open ? 45 : 0,
+            backgroundColor: open ? "#E91E8C" : "rgba(255,255,255,0.05)",
+            borderColor: open ? "#E91E8C" : "rgba(255,255,255,0.15)",
+          }}
+          transition={{ duration: 0.25 }}
+          className="w-9 h-9 rounded-full border flex items-center justify-center flex-shrink-0"
+          style={{ color: open ? "#000" : "#E91E8C" }}
+        >
+          <span className="text-xl leading-none font-light select-none">+</span>
+        </motion.div>
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden"
+          >
+            <p className="px-6 md:px-8 pb-6 text-white/50 leading-relaxed text-sm md:text-base border-t border-white/5 pt-4">
+              {a}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+}
+
 function App() {
   const [loading, setLoading] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -286,20 +334,23 @@ function App() {
   ];
 
   const portfolio = [
-    { id: 1, category: "frames", image: "/images/product-frame-1.png", title: "Wedding Portrait", aspect: "aspect-[4/3]" },
-    { id: 2, category: "mugs", image: "/images/product-mug-1.png", title: "Matte Black Mug", aspect: "aspect-square" },
-    { id: 3, category: "tshirts", image: "/images/product-tshirt-1.png", title: "Premium Cotton Tee", aspect: "aspect-[3/4]" },
-    { id: 4, category: "branding", image: "/images/product-branding-1.png", title: "Luxury Business Cards", aspect: "aspect-square" },
-    { id: 5, category: "frames", image: "/images/product-frame-2.png", title: "Minimalist Gold Frame", aspect: "aspect-[3/4]" },
-    { id: 6, category: "mugs", image: "/images/product-mug-2.png", title: "Couple's Mugs", aspect: "aspect-square" },
-    { id: 7, category: "tshirts", image: "/images/product-tshirt-2.png", title: "Boutique Apparel", aspect: "aspect-[3/4]" },
-    { id: 8, category: "branding", image: "/images/product-branding-2.png", title: "Premium Packaging", aspect: "aspect-[16/9]" },
+    { id: 1, category: "frames", image: "/images/product-frame-1.png", title: "Wedding Portrait", aspect: "aspect-[4/3]", gradient: "from-[#C4903A]/40 via-[#8B2FC9]/20 to-[#0B0B0B]", icon: <ImageIcon className="w-16 h-16" /> },
+    { id: 2, category: "mugs", image: "/images/product-mug-1.png", title: "Matte Black Mug", aspect: "aspect-square", gradient: "from-[#E91E8C]/40 via-[#8B2FC9]/20 to-[#0B0B0B]", icon: <Camera className="w-16 h-16" /> },
+    { id: 3, category: "tshirts", image: "/images/product-tshirt-1.png", title: "Premium Cotton Tee", aspect: "aspect-[3/4]", gradient: "from-[#2196F3]/40 via-[#E91E8C]/20 to-[#0B0B0B]", icon: <Shirt className="w-16 h-16" /> },
+    { id: 4, category: "branding", image: "/images/product-branding-1.png", title: "Luxury Business Cards", aspect: "aspect-square", gradient: "from-[#8B2FC9]/40 via-[#2196F3]/20 to-[#0B0B0B]", icon: <Briefcase className="w-16 h-16" /> },
+    { id: 5, category: "frames", image: "/images/product-frame-2.png", title: "Minimalist Gold Frame", aspect: "aspect-[3/4]", gradient: "from-[#C4903A]/40 via-[#E91E8C]/20 to-[#0B0B0B]", icon: <ImageIcon className="w-16 h-16" /> },
+    { id: 6, category: "mugs", image: "/images/product-mug-2.png", title: "Couple's Mugs", aspect: "aspect-square", gradient: "from-[#8B2FC9]/40 via-[#C4903A]/20 to-[#0B0B0B]", icon: <Camera className="w-16 h-16" /> },
+    { id: 7, category: "tshirts", image: "/images/product-tshirt-2.png", title: "Boutique Apparel", aspect: "aspect-[3/4]", gradient: "from-[#E91E8C]/40 via-[#C4903A]/20 to-[#0B0B0B]", icon: <Shirt className="w-16 h-16" /> },
+    { id: 8, category: "branding", image: "/images/product-branding-2.png", title: "Premium Packaging", aspect: "aspect-[16/9]", gradient: "from-[#2196F3]/40 via-[#8B2FC9]/20 to-[#0B0B0B]", icon: <Briefcase className="w-16 h-16" /> },
   ];
 
   const testimonials = [
-    { name: "Aarav Sharma", role: "Wedding Client", quote: "The frames we ordered for our wedding photos were beyond expectation. The quality and attention to detail are truly premium." },
-    { name: "Priya Thapa", role: "Business Owner", quote: "Lotus Print transformed our brand. The business cards and packaging design gave us the luxury feel we were looking for." },
-    { name: "Nitesh Gurung", role: "Corporate Partner", quote: "We order our corporate mugs and t-shirts exclusively from Lotus. Fast delivery, impeccable quality every single time." },
+    { name: "Aarav Sharma", role: "Wedding Client", location: "Nepalgunj", quote: "The frames we ordered for our wedding photos were beyond expectation. The quality and attention to detail are truly premium." },
+    { name: "Priya Thapa", role: "Business Owner", location: "Banke", quote: "Lotus Print transformed our brand. The business cards and packaging design gave us the luxury feel we were looking for." },
+    { name: "Nitesh Gurung", role: "Corporate Partner", location: "Nepalgunj", quote: "We order our corporate mugs and t-shirts exclusively from Lotus. Fast delivery, impeccable quality every single time." },
+    { name: "Sunita Rana", role: "Birthday Gift", location: "Kohalpur", quote: "Ordered a magic mug for my husband's birthday. He absolutely loved it! The photo print quality was stunning and delivery was on time." },
+    { name: "Roshan KC", role: "Anniversary Gift", location: "Nepalgunj", quote: "Got a beautiful canvas print of our couple photo. It now hangs proudly in our living room. I can't recommend Lotus enough!" },
+    { name: "Kavita Sah", role: "School Event", location: "Banke", quote: "Ordered custom t-shirts for our school sports event. The team was so helpful, the colours were vibrant, and delivery was fast." },
   ];
 
   const [activeTab, setActiveTab] = useState("all");
@@ -321,6 +372,23 @@ function App() {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [announcementVisible, setAnnouncementVisible] = useState(true);
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+
+  useEffect(() => {
+    if (!menuOpen) { document.body.style.overflow = ""; return; }
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setMenuOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => { document.body.style.overflow = ""; window.removeEventListener("keydown", onKey); };
+  }, [menuOpen]);
+
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  useEffect(() => {
+    return scrollYProgress.on("change", (v) => setShowBackToTop(v > 0.15));
+  }, [scrollYProgress]);
 
   const paymentMethods = [
     {
@@ -393,7 +461,45 @@ function App() {
 
   return (
     <div ref={containerRef} className="relative bg-[#0B0B0B] min-h-screen text-white font-sans overflow-hidden selection:bg-[#E91E8C] selection:text-black">
+      {/* Scroll Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[3px] z-[70] origin-left"
+        style={{ scaleX, background: "linear-gradient(90deg, #E91E8C, #8B2FC9, #2196F3)" }}
+      />
+
       <div className="mouse-spotlight hidden md:block pointer-events-none" />
+
+      {/* Announcement Banner */}
+      <AnimatePresence>
+        {announcementVisible && (
+          <motion.div
+            initial={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.4 }}
+            className="relative z-30 overflow-hidden border-b border-[#E91E8C]/20"
+            style={{ background: "linear-gradient(90deg, rgba(233,30,140,0.08), rgba(139,47,201,0.08), rgba(33,150,243,0.08))" }}
+          >
+            <div className="max-w-7xl mx-auto px-6 md:px-12 py-2.5 flex items-center justify-between gap-4">
+              <div className="flex-1 text-center text-sm text-white/75 leading-tight">
+                <span className="text-[#E91E8C] font-semibold">🎉 Festival Offer:</span>{" "}
+                Special discounts on bulk orders this season!{" "}
+                <button
+                  onClick={() => window.open(whatsappLink, "_blank")}
+                  className="text-[#E91E8C] font-semibold hover:underline ml-1"
+                >
+                  Claim Now →
+                </button>
+              </div>
+              <button
+                onClick={() => setAnnouncementVisible(false)}
+                className="flex-shrink-0 w-6 h-6 flex items-center justify-center text-white/30 hover:text-white transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <AnimatePresence>
         {loading && (
@@ -425,7 +531,7 @@ function App() {
       </AnimatePresence>
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-40 px-6 py-6 md:px-12 flex justify-between items-center">
+      <nav className="fixed top-0 left-0 right-0 z-40 px-6 py-5 md:px-12 flex justify-between items-center">
         <img src="/images/logo.png" alt="Lotus Print & Custom Gift" className="h-10 w-auto object-contain" />
         <div className="hidden md:flex gap-8 text-sm font-medium text-white/70">
           <a href="#about" className="hover:text-white transition-colors">About</a>
@@ -434,13 +540,109 @@ function App() {
           <a href="#payment" className="hover:text-white transition-colors">Payment</a>
           <a href="#contact" className="hover:text-white transition-colors">Contact</a>
         </div>
-        <Button 
-          onClick={() => window.open(whatsappLink, '_blank')}
-          className="bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-full px-6 transition-all"
-        >
-          Let's Talk
-        </Button>
+        <div className="flex items-center gap-3">
+          <Button 
+            onClick={() => window.open(whatsappLink, '_blank')}
+            className="hidden md:flex bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-full px-6 transition-all"
+          >
+            Let's Talk
+          </Button>
+          {/* Mobile hamburger */}
+          <button
+            className="md:hidden w-10 h-10 flex items-center justify-center text-white/70 hover:text-white transition-colors rounded-xl bg-white/5 border border-white/10"
+            onClick={() => setMenuOpen(true)}
+            aria-label="Open navigation"
+          >
+            <Menu className="w-5 h-5" />
+          </button>
+        </div>
       </nav>
+
+      {/* Mobile Menu Drawer */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[80] md:hidden"
+          >
+            {/* Backdrop */}
+            <motion.div
+              className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+              onClick={() => setMenuOpen(false)}
+            />
+            {/* Drawer panel */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute right-0 top-0 bottom-0 w-[82%] max-w-sm bg-[#0D0D0D] border-l border-white/10 flex flex-col p-8 overflow-y-auto"
+            >
+              {/* Header */}
+              <div className="flex justify-between items-center mb-10">
+                <img src="/images/logo.png" alt="Lotus Print" className="h-9 w-auto object-contain" />
+                <button
+                  onClick={() => setMenuOpen(false)}
+                  className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-white transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Nav links */}
+              <nav className="flex flex-col gap-1 flex-1">
+                {[
+                  { href: "#about", label: "About Us" },
+                  { href: "#services", label: "Services" },
+                  { href: "#portfolio", label: "Portfolio" },
+                  { href: "#payment", label: "Payment" },
+                  { href: "#contact", label: "Contact" },
+                ].map((link, i) => (
+                  <motion.a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.05 + i * 0.06, duration: 0.35 }}
+                    className="text-xl font-semibold text-white/60 hover:text-white py-4 border-b border-white/5 flex items-center justify-between group transition-colors"
+                  >
+                    {link.label}
+                    <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                  </motion.a>
+                ))}
+              </nav>
+
+              {/* Bottom actions */}
+              <div className="pt-8 space-y-3">
+                <Button
+                  onClick={() => { setMenuOpen(false); window.open(whatsappLink, "_blank"); }}
+                  className="w-full h-13 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-xl font-bold text-base py-3.5 shadow-[0_0_20px_rgba(37,211,102,0.2)]"
+                >
+                  Chat on WhatsApp
+                </Button>
+                <div className="flex justify-center gap-4 pt-2">
+                  <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-[#1877F2] hover:border-[#1877F2]/30 transition-all">
+                    <Facebook className="w-4 h-4" />
+                  </a>
+                  <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-[#E91E8C] hover:border-[#E91E8C]/30 transition-all">
+                    <Instagram className="w-4 h-4" />
+                  </a>
+                  <a href={socialLinks.tiktok} target="_blank" rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:border-white/30 transition-all">
+                    <TikTokIcon className="w-4 h-4" />
+                  </a>
+                </div>
+                <p className="text-center text-white/20 text-xs pt-1">Nepalgunj, Banke, Nepal</p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center pt-20 px-6 md:px-12 overflow-hidden">
@@ -650,17 +852,35 @@ function App() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.4 }}
-                  className={`group relative rounded-2xl overflow-hidden ${item.aspect} bg-white/5 cursor-pointer`}
+                  className={`group relative rounded-2xl overflow-hidden ${item.aspect} cursor-pointer`}
                 >
-                  <img 
-                    src={item.image} 
-                    alt={item.title} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  {/* Gradient background — always visible */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient}`} />
+                  {/* Subtle grid pattern overlay */}
+                  <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "repeating-linear-gradient(45deg, white 0, white 1px, transparent 0, transparent 50%)", backgroundSize: "14px 14px" }} />
+                  {/* Icon watermark */}
+                  <div className="absolute inset-0 flex items-center justify-center text-white/10 group-hover:text-white/15 transition-colors duration-500 scale-125">
+                    {item.icon}
+                  </div>
+                  {/* Real image — hides on error */}
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute bottom-0 left-0 p-6 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                    <span className="text-xs font-medium text-[#E91E8C] uppercase tracking-wider mb-2 block">{item.category}</span>
-                    <h3 className="text-xl font-medium text-white">{item.title}</h3>
+                  {/* Hover gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  {/* Info revealed on hover */}
+                  <div className="absolute bottom-0 left-0 p-6 translate-y-3 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                    <span className="text-xs font-semibold text-[#E91E8C] uppercase tracking-wider mb-2 block">{item.category}</span>
+                    <h3 className="text-xl font-bold text-white leading-tight">{item.title}</h3>
+                  </div>
+                  {/* Corner badge */}
+                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-8 h-8 rounded-full bg-[#E91E8C] flex items-center justify-center">
+                      <ArrowRight className="w-4 h-4 text-white" />
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -1008,39 +1228,83 @@ function App() {
       </AnimatePresence>
 
       {/* Testimonials */}
-      <section className="py-32 px-6 md:px-12 relative z-10 bg-[#0A0A0A]">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-32 px-6 md:px-12 relative z-10 bg-[#0A0A0A] overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/3 right-0 w-80 h-80 bg-[#E91E8C] rounded-full blur-[160px] opacity-[0.04]" />
+          <div className="absolute bottom-1/3 left-0 w-80 h-80 bg-[#8B2FC9] rounded-full blur-[160px] opacity-[0.04]" />
+        </div>
+        <div className="max-w-7xl mx-auto relative z-10">
           <motion.div 
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeIn}
-            className="text-center mb-20"
+            className="text-center mb-14"
           >
+            <span className="inline-block mb-5 px-4 py-1.5 rounded-full border border-[#E91E8C]/30 bg-[#E91E8C]/5 text-xs font-semibold text-[#E91E8C] uppercase tracking-widest">
+              Customer Reviews
+            </span>
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">Words of Trust</h2>
-            <p className="text-xl text-white/50 font-light max-w-2xl mx-auto">Don't just take our word for it.</p>
+            <p className="text-xl text-white/40 font-light max-w-2xl mx-auto">Real customers, real experiences — straight from Nepalgunj and across Nepal.</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Google rating badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex justify-center mb-14"
+          >
+            <div className="inline-flex items-center gap-4 glass-card rounded-full px-6 py-3 border border-[#E91E8C]/20">
+              <div className="flex items-center gap-1">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <Star key={i} className="w-4 h-4" fill="#FBBC04" stroke="#FBBC04" />
+                ))}
+              </div>
+              <span className="text-white font-bold text-lg">4.9</span>
+              <div className="w-px h-5 bg-white/15" />
+              <span className="text-white/50 text-sm">Highly Rated · 500+ Reviews</span>
+            </div>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {testimonials.map((test, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="glass-card p-8 rounded-2xl relative"
+                transition={{ duration: 0.6, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                className="glass-card p-7 rounded-2xl relative flex flex-col hover:border-white/20 transition-colors duration-300"
               >
-                <Star className="text-[#E91E8C] w-8 h-8 mb-6 opacity-50" />
-                <p className="text-lg text-white/80 leading-relaxed mb-8 italic font-serif">"{test.quote}"</p>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-[#E91E8C] font-bold text-lg">
-                    {test.name.charAt(0)}
+                {/* Stars */}
+                <div className="flex gap-1 mb-5">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <Star key={i} className="w-4 h-4" fill="#FBBC04" stroke="#FBBC04" />
+                  ))}
+                </div>
+
+                {/* Quote */}
+                <p className="text-base text-white/75 leading-relaxed mb-6 italic font-serif flex-1">
+                  "{test.quote}"
+                </p>
+
+                {/* Author + verified badge */}
+                <div className="flex items-center justify-between pt-4 border-t border-white/5">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-base text-white flex-shrink-0"
+                      style={{ background: `linear-gradient(135deg, #E91E8C, #8B2FC9)` }}>
+                      {test.name.charAt(0)}
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-white text-sm">{test.name}</h4>
+                      <p className="text-xs text-white/40">{test.role} · {test.location}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-medium text-white">{test.name}</h4>
-                    <p className="text-sm text-white/50">{test.role}</p>
-                  </div>
+                  <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-[#E91E8C]/10 text-[#E91E8C] border border-[#E91E8C]/20 uppercase tracking-wider flex-shrink-0">
+                    ✓ Verified
+                  </span>
                 </div>
               </motion.div>
             ))}
@@ -1329,30 +1593,36 @@ function App() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 gap-4">
+          <div className="grid grid-cols-1 gap-3">
             {[
-              { q: "How long does delivery take?", a: "Most orders are ready within 1–3 days depending on quantity and complexity. Bulk orders may take a bit longer." },
-              { q: "Can I send my own design or photo?", a: "Yes — send us your photo, logo, text, or reference image on WhatsApp and we’ll handle the rest." },
-              { q: "Do you do bulk and corporate orders?", a: "Absolutely. We handle weddings, offices, schools, events, and branded merchandise with bulk pricing." },
-              { q: "What file formats do you accept?", a: "JPG, PNG, PDF, and vector files are all accepted. Higher resolution files give the best print results." },
-              { q: "Can I pay on delivery?", a: "Yes, Cash on Delivery is available for selected orders. We also support eSewa, Khalti, and bank transfer." },
+              { q: "How long does delivery take?", a: "Most orders are ready within 1–3 days depending on quantity and complexity. Urgent orders can often be accommodated — just let us know your deadline on WhatsApp." },
+              { q: "Can I send my own design or photo?", a: "Absolutely! Send your photo, logo, text, or any reference image on WhatsApp and we’ll handle everything. Higher resolution images give the best print quality." },
+              { q: "Do you do bulk and corporate orders?", a: "Yes — we specialise in bulk orders for weddings, offices, schools, festivals, and corporate events. Special pricing applies for quantities above 10 pieces." },
+              { q: "What file formats do you accept?", a: "We accept JPG, PNG, PDF, and vector files (AI, SVG, EPS). Even a high-quality phone photo works — we’ll advise you on what’s best." },
+              { q: "Can I pay on delivery?", a: "Cash on Delivery is available for customers in Nepalgunj and nearby areas. We also accept eSewa, Khalti, and direct bank transfer for all locations." },
+              { q: "Do I get a preview before printing?", a: "Yes — we always send you a digital mockup before printing. We won’t proceed until you’ve approved the design and are completely happy with it." },
+              { q: "Do you deliver outside Nepalgunj?", a: "Yes! We ship across Nepal via trusted courier services. Delivery outside Nepalgunj typically takes 3–7 days depending on your location." },
             ].map((item, idx) => (
-              <details
-                key={idx}
-                className="group glass-card rounded-2xl border border-white/10 overflow-hidden transition-all"
-              >
-                <summary className="cursor-pointer list-none px-6 md:px-8 py-5 flex items-center justify-between gap-6">
-                  <span className="text-lg md:text-xl font-medium text-white">{item.q}</span>
-                  <span className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-[#E91E8C] group-open:bg-[#E91E8C] group-open:text-black transition-all flex-shrink-0">
-                    +
-                  </span>
-                </summary>
-                <div className="px-6 md:px-8 pb-6 pt-0 text-white/45 leading-relaxed">
-                  {item.a}
-                </div>
-              </details>
+              <FaqItem key={idx} q={item.q} a={item.a} idx={idx} />
             ))}
           </div>
+
+          {/* Still have a question? */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
+            className="mt-12 text-center"
+          >
+            <p className="text-white/35 mb-5 text-sm">Still have a question? We’re just a message away.</p>
+            <Button
+              onClick={() => window.open(whatsappLink, "_blank")}
+              className="h-12 px-8 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-full font-semibold shadow-[0_0_20px_rgba(37,211,102,0.2)] transition-all"
+            >
+              Ask on WhatsApp
+            </Button>
+          </motion.div>
         </div>
       </section>
 
@@ -1457,6 +1727,25 @@ function App() {
           </div>
         </div>
       </footer>
+
+      {/* Back to Top Button */}
+      <AnimatePresence>
+        {showBackToTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 10 }}
+            transition={{ duration: 0.3 }}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="fixed bottom-6 left-6 z-[300] w-12 h-12 rounded-full bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-all shadow-[0_4px_20px_rgba(0,0,0,0.3)]"
+            title="Back to top"
+          >
+            <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M18 15l-6-6-6 6" />
+            </svg>
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       {/* Floating WhatsApp Button */}
       <motion.a
