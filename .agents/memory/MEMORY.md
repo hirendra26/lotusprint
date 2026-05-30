@@ -1,0 +1,1 @@
+- [React 19 + Vite invalid hook call fix](react19-vite-hook-fix.md) — "Cannot read properties of null (reading 'useState')" in multi-file React 19 app fixed by explicit React import + optimizeDeps.
