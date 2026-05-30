@@ -1,5 +1,4 @@
 uploads = []
-outputs = []
 
 [[generated]]
 id = "qK9edZ0q_IRhFU3PZJFzZ"
@@ -60,3 +59,9 @@ id = "obI6QO26bHy1Re-gIy6gW"
 uri = "file://artifacts/lotus-design/public/images/product-branding-2.png"
 type = "image"
 title = "Elegant packaging design"
+
+[[outputs]]
+id = "NQw22mqYPZOLqaK_PENV5"
+uri = "file://lotus-design-production.zip"
+type = "unspecified"
+title = "Lotus Design — Production Build (11.6 MB)"
