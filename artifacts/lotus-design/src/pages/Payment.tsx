@@ -1,14 +1,24 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Building2, AlertCircle, Copy, Check, X } from "lucide-react";
+import { ArrowRight, Building2, AlertCircle, Copy, Check, X, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { fadeIn } from "../lib/animations";
 import { paymentMethods, pricingItems, bankDetails, whatsappLink, occasions } from "../lib/data";
+import { useCart } from "../lib/CartContext";
 
 export default function Payment() {
   const [paymentModal, setPaymentModal] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [addedId, setAddedId] = useState<string | null>(null);
+  const { addItem } = useCart();
+
+  const handleAddToCart = (item: typeof pricingItems[0]) => {
+    const id = item.name.toLowerCase().replace(/\s+/g, "-");
+    addItem({ id, name: item.name, price: parseInt(item.price), unit: item.unit, note: item.note, color: item.color });
+    setAddedId(id);
+    setTimeout(() => setAddedId(null), 1800);
+  };
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -115,34 +125,61 @@ export default function Payment() {
           </motion.div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {pricingItems.map((item, idx) => (
-              <motion.div key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                className="group relative glass-card rounded-2xl p-5 hover:border-white/20 transition-all duration-300 cursor-default overflow-hidden"
-              >
-                {item.tag && (
-                  <span className="absolute top-3 right-3 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full"
-                    style={{ background: `${item.color}22`, color: item.color }}>
-                    {item.tag}
-                  </span>
-                )}
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
-                  style={{ background: `${item.color}18`, color: item.color }}>
-                  {item.icon}
-                </div>
-                <p className="text-sm font-semibold text-white/80 mb-3 leading-tight">{item.name}</p>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-white/40 text-xs">Rs.</span>
-                  <span className="text-2xl font-bold tracking-tight" style={{ color: item.color }}>{item.price}</span>
-                  <span className="text-white/30 text-[11px]">+</span>
-                </div>
-                <p className="text-white/30 text-[11px] mt-0.5">{item.unit}</p>
-                <p className="text-white/25 text-[11px] mt-2 border-t border-white/5 pt-2">{item.note}</p>
-              </motion.div>
-            ))}
+            {pricingItems.map((item, idx) => {
+              const itemId = item.name.toLowerCase().replace(/\s+/g, "-");
+              const isAdded = addedId === itemId;
+              return (
+                <motion.div key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                  className="group relative glass-card rounded-2xl p-5 hover:border-white/20 transition-all duration-300 overflow-hidden flex flex-col"
+                >
+                  {item.tag && (
+                    <span className="absolute top-3 right-3 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full"
+                      style={{ background: `${item.color}22`, color: item.color }}>
+                      {item.tag}
+                    </span>
+                  )}
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
+                    style={{ background: `${item.color}18`, color: item.color }}>
+                    {item.icon}
+                  </div>
+                  <p className="text-sm font-semibold text-white/80 mb-3 leading-tight">{item.name}</p>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-white/40 text-xs">Rs.</span>
+                    <span className="text-2xl font-bold tracking-tight" style={{ color: item.color }}>{item.price}</span>
+                    <span className="text-white/30 text-[11px]">+</span>
+                  </div>
+                  <p className="text-white/30 text-[11px] mt-0.5">{item.unit}</p>
+                  <p className="text-white/25 text-[11px] mt-2 border-t border-white/5 pt-2">{item.note}</p>
+
+                  <motion.button
+                    onClick={() => handleAddToCart(item)}
+                    whileTap={{ scale: 0.93 }}
+                    className={`mt-4 w-full h-8 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-all duration-300 ${
+                      isAdded
+                        ? "bg-green-500/20 text-green-400 border border-green-500/30"
+                        : "bg-white/5 border border-white/10 text-white/50 hover:text-white hover:border-white/20 group-hover:border-opacity-50"
+                    }`}
+                    style={!isAdded ? { "--hover-color": item.color } as React.CSSProperties : {}}
+                  >
+                    {isAdded ? (
+                      <>
+                        <Check className="w-3.5 h-3.5" />
+                        Added!
+                      </>
+                    ) : (
+                      <>
+                        <ShoppingCart className="w-3.5 h-3.5" />
+                        Add to Cart
+                      </>
+                    )}
+                  </motion.button>
+                </motion.div>
+              );
+            })}
           </div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.4 }}
