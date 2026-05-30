@@ -2,8 +2,10 @@ import React, { useEffect, useState, useRef, type ReactNode } from "react";
 import { useLocation, Link } from "wouter";
 import Lenis from "lenis";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
-import { X, Menu, Facebook, Instagram, Phone, MapPin, Mail } from "lucide-react";
+import { X, Menu, Facebook, Instagram, ShoppingCart } from "lucide-react";
 import { TikTokIcon } from "./TikTokIcon";
+import { CartDrawer } from "./CartDrawer";
+import { useCart } from "../lib/CartContext";
 import { socialLinks, whatsappLink } from "../lib/data";
 
 const navLinks = [
@@ -18,6 +20,7 @@ function Nav({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOpen: (v: bo
   const [location] = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [announcementVisible, setAnnouncementVisible] = useState(true);
+  const { totalItems, openCart } = useCart();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -99,7 +102,26 @@ function Nav({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOpen: (v: bo
           </div>
 
           {/* Desktop CTA */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={openCart}
+              className="relative w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:text-white hover:border-[#E91E8C]/40 transition-all"
+              aria-label="Open cart"
+            >
+              <ShoppingCart className="w-4.5 h-4.5" />
+              {totalItems > 0 && (
+                <motion.span
+                  key={totalItems}
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  className="absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] px-1 rounded-full bg-[#E91E8C] text-white text-[10px] font-black flex items-center justify-center leading-none shadow-[0_0_8px_rgba(233,30,140,0.6)]"
+                >
+                  {totalItems > 9 ? "9+" : totalItems}
+                </motion.span>
+              )}
+            </motion.button>
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
@@ -110,14 +132,28 @@ function Nav({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOpen: (v: bo
             </motion.button>
           </div>
 
-          {/* Mobile hamburger */}
-          <button
-            className="md:hidden w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 transition-colors"
-            onClick={() => setMenuOpen(true)}
-            aria-label="Open menu"
-          >
-            <Menu className="w-5 h-5" />
-          </button>
+          {/* Mobile right — cart + hamburger */}
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              className="relative w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 transition-colors"
+              onClick={openCart}
+              aria-label="Open cart"
+            >
+              <ShoppingCart className="w-4.5 h-4.5" />
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 min-w-[16px] h-[16px] px-0.5 rounded-full bg-[#E91E8C] text-white text-[9px] font-black flex items-center justify-center leading-none">
+                  {totalItems > 9 ? "9+" : totalItems}
+                </span>
+              )}
+            </button>
+            <button
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 transition-colors"
+              onClick={() => setMenuOpen(true)}
+              aria-label="Open menu"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
+          </div>
         </div>
       </motion.nav>
 
@@ -373,6 +409,7 @@ export function Layout({ children }: LayoutProps) {
 
       <WhatsAppFab />
       <BackToTop />
+      <CartDrawer />
     </div>
   );
 }
