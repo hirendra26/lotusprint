@@ -134,10 +134,15 @@ function RatingSummary({ all }: { all: Review[] }) {
         <p className="text-6xl font-black text-white tracking-tighter">{avg.toFixed(1)}</p>
         <StarRating value={Math.round(avg)} size="md" />
         <p className="text-white/35 text-xs mt-2">{all.length} review{all.length !== 1 ? "s" : ""}</p>
-        <div className="mt-3 flex items-center justify-center gap-1.5">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" className="h-4 opacity-40" />
-          <span className="text-white/25 text-[10px]">style</span>
-        </div>
+        <a
+          href="https://share.google/LZi4U3IAS8znsoYMj"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/10 hover:border-white/20 hover:bg-white/5 transition-all group"
+        >
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" className="h-3.5 opacity-50 group-hover:opacity-80 transition-opacity" />
+          <span className="text-white/30 group-hover:text-white/60 text-[10px] transition-colors">Reviews</span>
+        </a>
       </div>
       <div className="flex-1 w-full space-y-2">
         {counts.map(({ star, count, pct }) => (
@@ -378,8 +383,19 @@ export default function Reviews() {
               )}
             </AnimatePresence>
 
+            {/* Google Reviews CTA */}
+            <a
+              href="https://share.google/LZi4U3IAS8znsoYMj"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 flex items-center justify-center gap-2.5 w-full h-11 rounded-2xl border border-white/10 hover:border-white/20 hover:bg-white/5 transition-all group"
+            >
+              <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" className="h-4 opacity-50 group-hover:opacity-80 transition-opacity" />
+              <span className="text-white/40 group-hover:text-white/70 text-sm font-medium transition-colors">Write a Review on Google</span>
+            </a>
+
             {/* Verified badge */}
-            <div className="mt-4 flex items-center justify-center gap-2 text-white/25 text-xs">
+            <div className="mt-3 flex items-center justify-center gap-2 text-white/25 text-xs">
               <ThumbsUp className="w-3.5 h-3.5" />
               <span>All reviews are from verified customers</span>
             </div>
