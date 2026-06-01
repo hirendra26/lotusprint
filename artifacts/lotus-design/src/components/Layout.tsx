@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, type ReactNode } from "react";
-import { useLocation, Link } from "wouter";
+import { useLocation, Link, useRoute } from "wouter";
 import Lenis from "lenis";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { X, Menu, Facebook, Instagram, ShoppingCart } from "lucide-react";
@@ -123,14 +123,15 @@ function Nav({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOpen: (v: bo
                 </motion.span>
               )}
             </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              onClick={() => window.open(whatsappLink, "_blank")}
-              className="h-10 px-6 rounded-full bg-[#E91E8C] text-white text-sm font-semibold hover:bg-[#c9166e] transition-all shadow-[0_0_20px_rgba(233,30,140,0.3)]"
-            >
-              Order Now
-            </motion.button>
+            <Link href="/order">
+              <motion.span
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex h-10 px-6 rounded-full bg-[#E91E8C] text-white text-sm font-semibold items-center hover:bg-[#c9166e] transition-all shadow-[0_0_20px_rgba(233,30,140,0.3)] cursor-pointer"
+              >
+                Order Now
+              </motion.span>
+            </Link>
           </div>
 
           {/* Mobile right — cart + hamburger */}
