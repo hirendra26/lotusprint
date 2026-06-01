@@ -179,3 +179,48 @@ export const pricingItems = [
   { icon: <MonitorSmartphone className="w-5 h-5" />, name: "Laptop Sleeve", price: "700", unit: "per piece", note: "Custom printed", tag: null, color: "#2196F3" },
   { icon: <Gift className="w-5 h-5" />, name: "Tote Bag", price: "350", unit: "per piece", note: "Printed canvas", tag: "Eco-Friendly", color: "#E91E8C" },
 ];
+
+export type OrderStatus = "confirmed" | "processing" | "ready" | "delivered" | "cancelled";
+
+export interface Order {
+  id: string;
+  phone: string;
+  product: string;
+  qty: number;
+  date: string;
+  status: OrderStatus;
+  note?: string;
+  estimatedDate?: string;
+}
+
+export const orders: Order[] = [
+  {
+    id: "ORD-001",
+    phone: "9848363025",
+    product: "Custom Mug (Photo Print)",
+    qty: 2,
+    date: "2026-05-28",
+    status: "delivered",
+    note: "Red handle, name 'Raju' printed",
+    estimatedDate: "2026-05-30",
+  },
+  {
+    id: "ORD-002",
+    phone: "9800000001",
+    product: "Custom T-Shirt x3",
+    qty: 3,
+    date: "2026-05-29",
+    status: "processing",
+    note: "White base, logo on front",
+    estimatedDate: "2026-06-01",
+  },
+  {
+    id: "ORD-003",
+    phone: "9800000002",
+    product: "Photo Frame + Canvas Print",
+    qty: 1,
+    date: "2026-05-30",
+    status: "confirmed",
+    estimatedDate: "2026-06-02",
+  },
+];

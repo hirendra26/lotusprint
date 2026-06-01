@@ -13,6 +13,7 @@ const navLinks = [
   { label: "Services", href: "/services" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Payment", href: "/payment" },
+  { label: "Track Order", href: "/tracking" },
   { label: "Contact", href: "/contact" },
 ];
 
