@@ -8,6 +8,7 @@ import Portfolio from "./pages/Portfolio";
 import Payment from "./pages/Payment";
 import Contact from "./pages/Contact";
 import Tracking from "./pages/Tracking";
+import Order from "./pages/Order";
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
           <Route path="/payment" component={Payment} />
           <Route path="/contact" component={Contact} />
           <Route path="/tracking" component={Tracking} />
+          <Route path="/order" component={Order} />
           <Route>
             <div className="min-h-[60vh] flex flex-col items-center justify-center px-6 text-center">
               <h1 className="text-6xl font-black mb-4">404</h1>
